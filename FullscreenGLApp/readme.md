@@ -35,7 +35,9 @@ When the program is run it will display detected planes as rectangles with a gri
 
 Plane detection is done in real time in a 15 meter cube centered on your current location. If no planes are detected, the display will be red. In this case, look around a bit to scan the environment until planes are detected.
 
-Bugs?
+Issues?
 -
 
-Please report them on the bug tracker here on GitHub.
+Please report bugs on the issue tracker here on GitHub.
+
+There is a forum post for this example [here](https://forum.magicleap.com/hc/en-us/community/posts/360040282051-Fullscreen-GL-App-Example).
