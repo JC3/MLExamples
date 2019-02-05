@@ -14,8 +14,6 @@
 // ---------------------------------------------------------------------
 // %BANNER_END%
 
-#include <chrono>
-
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 
