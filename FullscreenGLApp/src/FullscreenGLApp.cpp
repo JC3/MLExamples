@@ -261,8 +261,8 @@ int main () {
                 (ht_state.error == MLHeadTrackingError_None) &&
                 (ht_state.mode == MLHeadTrackingMode_6DOF) &&
                 (ht_state.confidence > 0.9) &&
-                (MLHeadTrackingGetStaticData(head_tracking, &ht_data)) &&
-                (MLSnapshotGetTransform(snapshot, &ht_data.coord_frame_head, &ht_transform));
+                (MLHeadTrackingGetStaticData(head_tracking, &ht_data) == MLResult_Ok) &&
+                (MLSnapshotGetTransform(snapshot, &ht_data.coord_frame_head, &ht_transform) == MLResult_Ok);
 
             CHECK(MLPerceptionReleaseSnapshot(snapshot));
 
@@ -431,9 +431,7 @@ int main () {
 void drawPlanes(const MLPlane *p, int np) {
 
     // If no planes found, just turn the screen red. This is easier to see
-    // than log messages, and simpler than setting controller LEDs. This was
-    // added to help spot whatever this problem was:
-    // https://forum.magicleap.com/hc/en-us/community/posts/360040505712
+    // than log messages, and simpler than setting controller LEDs.
     if (!np) {
         glClearColor(0.25, 0, 0, 0);
         glClear(GL_COLOR_BUFFER_BIT);
