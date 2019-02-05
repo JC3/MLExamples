@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FullscreenGLApp", "FullscreenGLApp\FullscreenGLApp.vcxproj", "{D76A984E-2CCC-4F0D-8233-E8974DA4656D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ML = Debug|ML
+		Debug|x64 = Debug|x64
+		Release|ML = Release|ML
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D76A984E-2CCC-4F0D-8233-E8974DA4656D}.Debug|ML.ActiveCfg = Debug|ML
+		{D76A984E-2CCC-4F0D-8233-E8974DA4656D}.Debug|ML.Build.0 = Debug|ML
+		{D76A984E-2CCC-4F0D-8233-E8974DA4656D}.Debug|x64.ActiveCfg = Debug|x64
+		{D76A984E-2CCC-4F0D-8233-E8974DA4656D}.Debug|x64.Build.0 = Debug|x64
+		{D76A984E-2CCC-4F0D-8233-E8974DA4656D}.Release|ML.ActiveCfg = Release|ML
+		{D76A984E-2CCC-4F0D-8233-E8974DA4656D}.Release|ML.Build.0 = Release|ML
+		{D76A984E-2CCC-4F0D-8233-E8974DA4656D}.Release|x64.ActiveCfg = Release|x64
+		{D76A984E-2CCC-4F0D-8233-E8974DA4656D}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A01E5034-D99F-4AE4-A387-C9BDEFA68D76}
+	EndGlobalSection
+EndGlobal

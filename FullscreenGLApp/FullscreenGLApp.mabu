@@ -1,0 +1,11 @@
+KIND = program
+SRCS = src/FullscreenGLApp.cpp \
+	   src/glad.c
+INCS = inc/
+
+OPTIONS = \
+	standard-c++/11 \
+	stl/libgnustl
+
+USES = ml_sdk OpenGL stdc++
+SHLIBS = ml_privileges
