@@ -3,6 +3,8 @@ FullscreenGLApp
 
 Built for ML SDK 0.19.0. Include VS 2017 project files, but should build fine with just mabu.
 
+**You'll have to update MLCERT in the package file to specify your own certificate, or remove the line and use the -s option to mabu.**
+
 About This Example
 -
 
