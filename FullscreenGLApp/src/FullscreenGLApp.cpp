@@ -6,6 +6,10 @@
 // Use of this file is governed by the Creator Agreement, located
 // here: https://id.magicleap.com/creator-terms
 //
+// The author of this example is not affiliated with Magic Leap, and 
+// this is not an official example. It is provided entirely as-is, and
+// might catch your headset on fire, etc.
+//
 // %COPYRIGHT_END%
 // ---------------------------------------------------------------------
 // %BANNER_END%
@@ -15,7 +19,7 @@
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 
-#include <glad/glad.h>
+#include <glad/glad.h> // Generated at https://glad.dav1d.de/
 
 #include <runtime/external/glm/glm.hpp>
 #include <runtime/external/glm/gtx/quaternion.hpp>
@@ -32,23 +36,20 @@
 #include <ml_planes.h>
 #include <ml_privileges.h>
 
-static const char APP_NAME[] = "com.mlexamples.fullscreenglapp";
 
-static const MLPrivilegeID REQUIRED_PRIVILEGES[] = {
-	MLPrivilegeID_WorldReconstruction,
-	MLPrivilegeID_LowLatencyLightwear,
-	MLPrivilegeID_Invalid
-};
+//-----------------------------------------------------------------------------
+/**
+ * This is basically graphics_context_t from the SimpleGLApp SDK example, with 
+ * the addition of cleanup() and context() and some other changes. It just 
+ * wraps windowing system stuff.
+ *
+ * This example uses the OpenGL 3.0 Compatibility Profile and uses the fixed
+ * function pipeline API to draw. You can use core profile and shaders if you
+ * want, too. Same idea re: usage of camera transformations and such. The 3.0
+ * compatibility profile is specified in the constructor, go look there.
+ */
+//-----------------------------------------------------------------------------
 
-#define CHECK(c) do { \
-	auto result = (c); \
-	if (result != MLResult_Ok) { \
-		ML_LOG(Error, "%s: %s failed (%d).", APP_NAME, #c, (int)result); \
-		return -1; \
-	} \
-} while (0)
-
-// Adaptation of graphics_context_t from SimpleGLApp SDK example.
 class SystemGraphicsContext {
 private:
 	EGLDisplay egl_display;
@@ -117,6 +118,31 @@ MLHandle SystemGraphicsContext::context() const {
 	return (MLHandle)egl_context;
 }
 
+
+//-----------------------------------------------------------------------------
+
+const char APP_NAME[] = "com.mlexamples.fullscreenglapp";
+
+const MLPrivilegeID REQUIRED_PRIVILEGES[] = {
+	MLPrivilegeID_WorldReconstruction,
+	MLPrivilegeID_LowLatencyLightwear,
+	MLPrivilegeID_Invalid
+};
+
+/** Quick and dirty error checking macro to minimize distractions in the example
+ *  code below. Best practice would be to unwind and shutdown any modules that
+ *  have been initialized when a failure occurs. This example does not do that. */
+#define CHECK(c) do { \
+	auto result = (c); \
+	if (result != MLResult_Ok) { \
+		ML_LOG(Error, "%s: %s failed (%d).", APP_NAME, #c, (int)result); \
+		return -1; \
+	} \
+} while (0)
+
+void drawPlanes(const MLPlane *p, int np);
+
+/** Converts an MLTransform to a GLM matrix. */
 glm::mat4 mlToGL(const MLTransform &ml) {
 
 	glm::quat q;
@@ -129,7 +155,8 @@ glm::mat4 mlToGL(const MLTransform &ml) {
 
 }
 
-void drawPlanes(const MLPlane *p, int np);
+
+//-----------------------------------------------------------------------------
 
 int main () {
 
@@ -174,16 +201,23 @@ int main () {
 	SystemGraphicsContext graphics_context; // constructor inits a context
 	graphics_context.makeCurrent();
 
+	// A GL context *must* be current for this to succeed! 
 	if (!gladLoadGLLoader((GLADloadproc)eglGetProcAddress)) {
 		ML_LOG(Error, "%s: GL loader failed.", APP_NAME);
 		return -1;
 	}
 
+	// We're responsible for creating the render target framebuffer.
 	GLuint framebuffer;
 	glGenFramebuffers(1, &framebuffer);
 
-	GLuint calllist = glGenLists(1);
+	// This call list is just used 'cause we render the scene multiple times.
+	GLuint calllist = glGenLists(1); 
 
+	// In the SystemGraphicsContext constructor, I tried to make the requested
+	// surface format match the one specified here as closely as possible. I am
+	// not sure what the exact connection is between the two formats, though.
+	// This is an open question.
 	MLGraphicsOptions graphics_options = {};
 	graphics_options.color_format = MLSurfaceFormat_RGBA8UNormSRGB;
 	graphics_options.depth_format = MLSurfaceFormat_D32Float; // no stencil here
@@ -200,13 +234,17 @@ int main () {
 	// ==== MAIN LOOP =========================================================
 
 	MLHandle planes_query = ML_INVALID_HANDLE; // invalid unless query running
-	MLPlane query_results[16];
+	MLPlane query_results[16]; // 16 is arbitrary; seemed reasonable
 	uint32_t query_nresults = 0;
 	bool quit = false; // loop exits when true
 
 	// This will run until bumper button is pressed on any controller.
 	do {
 
+		// ---- GET PLANES
+		// Start a plane query if none is running. We'll grab the head position
+		// and use that to define the bounding box around the query.
+		
 		if (planes_query == ML_INVALID_HANDLE) {
 
 			MLSnapshot *snapshot;
@@ -224,27 +262,34 @@ int main () {
 				(MLSnapshotGetTransform(snapshot, &ht_data.coord_frame_head, &ht_transform));
 
 			CHECK(MLPerceptionReleaseSnapshot(snapshot));
-			
-			MLPlanesQuery query = {};
-			query.bounds_center = ht_transform.position;
-			query.bounds_extents.x = 6;
-			query.bounds_extents.y = 6;
-			query.bounds_extents.z = 6;
-			query.bounds_rotation = ht_transform.rotation;
-			query.flags = MLPlanesQueryFlag_AllOrientations | MLPlanesQueryFlag_Semantic_All;
-			query.max_results = sizeof(query_results) / sizeof(MLPlane);
-			query.min_plane_area = 0.25;
 
-			CHECK(MLPlanesQueryBegin(planes, &query, &planes_query));
-			//ML_LOG(Info, "%s: Planes query started.", APP_NAME);
+			if (ht_valid) {
+
+				// Search in a 6 meter cube centered on the headset.
+				MLPlanesQuery query = {};
+				query.bounds_center = ht_transform.position;
+				query.bounds_extents.x = 6;
+				query.bounds_extents.y = 6;
+				query.bounds_extents.z = 6;
+				query.bounds_rotation = ht_transform.rotation;
+				query.flags = MLPlanesQueryFlag_AllOrientations | MLPlanesQueryFlag_Semantic_All;
+				query.max_results = sizeof(query_results) / sizeof(MLPlane);
+				query.min_plane_area = 0.25;
+
+				CHECK(MLPlanesQueryBegin(planes, &query, &planes_query));
+
+			}
 
 		} 
 		
+		// If a plane query is running, retrieve the results if its ready.
 		if (planes_query != ML_INVALID_HANDLE &&
 			MLPlanesQueryGetResults(planes, planes_query, query_results, &query_nresults) == MLResult_Ok) 
 		{
 			planes_query = ML_INVALID_HANDLE;
 		}
+
+		// ---- RENDER SCENE
 
 		MLGraphicsFrameParams frame_params;
 		CHECK(MLGraphicsInitFrameParams(&frame_params));
@@ -261,23 +306,49 @@ int main () {
 
 		if (frame_result == MLResult_Ok) {
 
+			/* How to render things (fixed function pipeline version):
+			 *
+			 * The scene must be rendered for each virtual camera (left eye, right eye).
+			 *
+			 * The MLGraphicsVirtualCameraInfoArray structure contains all the info
+			 * needed to set up the viewport, projection, and modelview matrices for
+			 * each camera, and implicitly encapsulates things like the head position,
+			 * visual calibration, etc.
+			 *
+			 * - Viewport: Common to all cameras and specified in .viewport.
+			 * - Projection: Directly specified for each camera in .projection.
+			 * - Modelview: The inverse of the camera transform for each camera.
+			 *
+			 * Rendering to each camera is accomplished by rendering to a specific layer
+			 * in a multi-layered texture created by the API. Those texture names are
+			 * given to us in .color_id and .depth_id, and the layer number corresponding
+			 * to each camera is the integer name of the camera (note: this may not be the
+			 * same as the index in the camera array so always use .virtual_camera_name!).
+			 */
+
 			for (int k = 0; k < MLGraphicsVirtualCameraName_Count; ++k) {
 
+				// Set render target to the appropriate texture layer for this camera.
 				const MLGraphicsVirtualCameraInfo &camera = cameras.virtual_cameras[k];
 				glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 				glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, cameras.color_id, 0, camera.virtual_camera_name);
 				glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, cameras.depth_id, 0, camera.virtual_camera_name);
 
+				// Viewport is common to all cameras and is given.
 				glViewport(cameras.viewport.x, cameras.viewport.y, cameras.viewport.w, cameras.viewport.h);
 
+				// Projection matrix is given directly for each camera.
 				glMatrixMode(GL_PROJECTION);
 				glPushMatrix();
 				glLoadMatrixf(camera.projection.matrix_colmajor);
 
+				// Modelview is inverse of transform for each camera. GLM simplifies this.
 				glMatrixMode(GL_MODELVIEW);
 				glPushMatrix();
 				glLoadMatrixf(glm::value_ptr(glm::inverse(mlToGL(camera.transform))));
 
+				// Now we can draw things in the reality coordinate frame. Also, this example
+				// renders once to a call list and uses that for remaining cameras.
 				if (k == 0) {
 					glNewList(calllist, GL_COMPILE_AND_EXECUTE);
 					drawPlanes(query_results, query_nresults);
@@ -292,21 +363,25 @@ int main () {
 				glPopMatrix();
 				glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+				// Signal that we're done rendering this camera. MLGraphicsEndFrame will
+				// fail if you don't trigger the signal for every camera, so even if your
+				// app, say, only runs in the left eye, you still need to signal everything.
 				MLGraphicsSignalSyncObjectGL(graphics, cameras.virtual_cameras[k].sync_object);
 
 			}
 
+			// End frame must match begin frame.
 			CHECK(MLGraphicsEndFrame(graphics, frame));
 			graphics_context.swapBuffers();
 
 		} else if (frame_result != MLResult_Timeout) { // sometimes it fails with timeout when device is busy
 
 			ML_LOG(Error, "%s: MLGraphicsBeginFrame failed with %d", APP_NAME, frame_result);
-			break;
+			quit = true;
 
 		}
 
-		// --------------------------------------------------------------------
+		// ---- CHECK CONTROLLER BUTTONS
 		// Poll controllers for bumper button presses. The other way to do this
 		// is to use MLInputSetControllerCallbacks for a callback-based 
 		// approach. Polling serves our purpose here though.
@@ -314,17 +389,19 @@ int main () {
 		MLInputControllerState input_states[MLInput_MaxControllers];
 		CHECK(MLInputGetControllerState(input, input_states));
 
-		for (int k = 0; k < MLInput_MaxControllers; ++k)
+		for (int k = 0; k < MLInput_MaxControllers; ++k) {
 			if (input_states[k].button_state[MLInputControllerButton_Bumper]) {
 				ML_LOG(Info, "%s: Bye!", APP_NAME);
 				quit = true;
 				break;
 			}
+		}
 
 	} while (!quit);
 
 	// ==== CLEANUP ===========================================================
 
+	// Just the opposite order of initialization.
 	glDeleteLists(calllist, 1);
 	glDeleteFramebuffers(1, &framebuffer);
 	MLGraphicsDestroyClient(&graphics);
@@ -333,15 +410,27 @@ int main () {
 	MLPlanesDestroy(planes);
 	MLHeadTrackingDestroy(head_tracking);
 	MLPerceptionShutdown();
+
 	ML_LOG(Info, "%s: Finished.", APP_NAME);
 
 }
 
 
+//-----------------------------------------------------------------------------
+/**
+ * Draws planes.
+ *
+ * @param  p   Array of planes.
+ * @param  np  Number of planes in array.
+ */
+//-----------------------------------------------------------------------------
+
 void drawPlanes(const MLPlane *p, int np) {
 
 	// If no planes found, just turn the screen red. This is easier to see
-	// than log messages, and simpler than setting controller LEDs.
+	// than log messages, and simpler than setting controller LEDs. This was
+	// added to help spot whatever this problem was:
+	// https://forum.magicleap.com/hc/en-us/community/posts/360040505712
 	if (!np) {
 		glClearColor(0.25, 0, 0, 0);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -361,22 +450,28 @@ void drawPlanes(const MLPlane *p, int np) {
 
 	for (int k = 0; k < np; ++k, ++p) {
 
+		// All the GL_BLEND stuff is just to simplify things so I can set 
+		// the color once here and draw different shades of it below.
 		if (p->flags & MLPlanesQueryFlag_Semantic_Ceiling)
-			glColor3f(0, 1, 1);
+			glColor3f(0, 1, 1); // Cyan ceiling
 		else if (p->flags & MLPlanesQueryFlag_Semantic_Floor)
-			glColor3f(1, 0, 0);
+			glColor3f(1, 0, 0); // Red floor
 		else
-			glColor3f(1, 1, 1);
+			glColor3f(1, 1, 1); // White everything else
 
+		// Pack plane transform into an MLTransform.
+		// https://forum.magicleap.com/hc/en-us/community/posts/360040229151
 		MLTransform transform;
 		transform.position = p->position;
 		transform.rotation = p->rotation;
 		float hw = p->width / 2;
 		float hh = p->height / 2;
 
+		// Apply to modelview so we can draw in plane coordinates.
 		glPushMatrix();
 		glMultMatrixf(glm::value_ptr(mlToGL(transform)));
 
+		// Border around plane.
 		glBlendColor(0, 0, 0, 1);
 		glBegin(GL_LINE_LOOP);
 		glVertex2f(-hw, -hh);
@@ -385,6 +480,7 @@ void drawPlanes(const MLPlane *p, int np) {
 		glVertex2f(-hw,  hh);
 		glEnd();
 
+		// 10cm grid in plane.
 		glBlendColor(0, 0, 0, 0.25);
 		glBegin(GL_LINES);
 		for (float x = -hw + 0.1; x < hw; x += 0.1) {
@@ -396,7 +492,8 @@ void drawPlanes(const MLPlane *p, int np) {
 			glVertex2f(hw, y);
 		}
 		glEnd();
-
+		
+		// And draw its normal in the center, yellow -> white.
 		glBlendColor(0, 0, 0, 1);
 		glBegin(GL_LINES);
 		glColor3f(1, 1, 1);
