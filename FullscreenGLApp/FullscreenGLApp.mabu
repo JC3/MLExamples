@@ -9,3 +9,4 @@ OPTIONS = \
 
 USES = ml_sdk OpenGL stdc++
 SHLIBS = ml_privileges
+

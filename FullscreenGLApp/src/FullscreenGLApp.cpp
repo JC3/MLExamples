@@ -268,16 +268,16 @@ int main () {
 
             if (ht_valid) {
 
-                // Search in a 6 meter cube centered on the headset.
+                // Search in a 15 meter cube centered on the headset.
                 MLPlanesQuery query = {};
                 query.bounds_center = ht_transform.position;
-                query.bounds_extents.x = 6;
-                query.bounds_extents.y = 6;
-                query.bounds_extents.z = 6;
+                query.bounds_extents.x = 15;
+                query.bounds_extents.y = 15;
+                query.bounds_extents.z = 15;
                 query.bounds_rotation = ht_transform.rotation;
                 query.flags = MLPlanesQueryFlag_AllOrientations | MLPlanesQueryFlag_Semantic_All;
                 query.max_results = sizeof(query_results) / sizeof(MLPlane);
-                query.min_plane_area = 0.25;
+                query.min_plane_area = 0.2;
 
                 CHECK(MLPlanesQueryBegin(planes, &query, &planes_query));
 
@@ -481,14 +481,14 @@ void drawPlanes(const MLPlane *p, int np) {
         glVertex2f(-hw,  hh);
         glEnd();
 
-        // 10cm grid in plane.
+        // 8cm grid in plane.
         glBlendColor(0, 0, 0, 0.25);
         glBegin(GL_LINES);
-        for (float x = -hw + 0.1; x < hw; x += 0.1) {
+        for (float x = -hw + 0.08; x < hw; x += 0.08) {
             glVertex2f(x, -hh);
             glVertex2f(x, hh);
         }
-        for (float y = -hh + 0.1; y < hh; y += 0.1) {
+        for (float y = -hh + 0.08; y < hh; y += 0.08) {
             glVertex2f(-hw, y);
             glVertex2f(hw, y);
         }

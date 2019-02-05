@@ -1,2 +1,3 @@
 REFS = FullscreenGLApp
 MLCERT = "C:\Users\Jason\Work\sn\magicleap\sndevelopment.cert"
+DATAS = media/ : media/
