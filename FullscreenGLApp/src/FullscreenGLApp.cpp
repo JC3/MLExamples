@@ -121,7 +121,7 @@ MLHandle SystemGraphicsContext::context() const {
 
 //-----------------------------------------------------------------------------
 
-const char APP_NAME[] = "com.mlexamples.fullscreenglapp";
+const char APP_TAG[] = "mlx.fullscreenglapp";
 
 const MLPrivilegeID REQUIRED_PRIVILEGES[] = {
     MLPrivilegeID_WorldReconstruction,
@@ -135,7 +135,7 @@ const MLPrivilegeID REQUIRED_PRIVILEGES[] = {
 #define CHECK(c) do { \
     auto result = (c); \
     if (result != MLResult_Ok) { \
-        ML_LOG(Error, "%s: %s failed (%d).", APP_NAME, #c, (int)result); \
+        ML_LOG_TAG(Error, APP_TAG, "%s failed (%d).", #c, (int)result); \
         return -1; \
     } \
 } while (0)
@@ -163,7 +163,7 @@ int main () {
     // ==== INITIALIZE ========================================================
     
     // ---- Lifecycle
-    ML_LOG(Info, "%s: Initializing...", APP_NAME);
+    ML_LOG_TAG(Info, APP_TAG, "Initializing...");
     CHECK(MLLifecycleInit(NULL, NULL));
 
     // ---- Privileges
@@ -171,7 +171,7 @@ int main () {
     CHECK(MLPrivilegesStartup());
     for (auto p = REQUIRED_PRIVILEGES; *p != MLPrivilegeID_Invalid; ++ p)
         if (MLPrivilegesRequestPrivilege(*p) != MLPrivilegesResult_Granted) {
-            ML_LOG(Error, "%s: Privilege %d denied.", APP_NAME, *p);
+            ML_LOG_TAG(Error, APP_TAG, "Privilege %d denied.", *p);
             return -1;
         }
 
@@ -203,7 +203,7 @@ int main () {
 
     // A GL context *must* be current for this to succeed! 
     if (!gladLoadGLLoader((GLADloadproc)eglGetProcAddress)) {
-        ML_LOG(Error, "%s: GL loader failed.", APP_NAME);
+        ML_LOG_TAG(Error, APP_TAG, "GL loader failed.");
         return -1;
     }
 
@@ -229,7 +229,7 @@ int main () {
     // ---- Finalize
 
     CHECK(MLLifecycleSetReadyIndication());
-    ML_LOG(Info, "%s: Ready! Press bumper to exit.", APP_NAME);
+    ML_LOG_TAG(Info, APP_TAG, "Ready! Press bumper to exit.");
 
     // ==== MAIN LOOP =========================================================
 
@@ -238,7 +238,10 @@ int main () {
     uint32_t query_nresults = 0;
     bool quit = false; // loop exits when true
 
-    // This will run until bumper button is pressed on any controller.
+    // This will run until bumper button is pressed on any controller. BUG: If
+    // the controller is powered on after this app starts, sometimes it won't
+    // respond to button presses and must be forcefully terminated. Will be 
+    // fixed when I figure out how to best detect and recover from that.
     do {
 
         // ---- GET PLANES
@@ -376,7 +379,7 @@ int main () {
 
         } else if (frame_result != MLResult_Timeout) { // sometimes it fails with timeout when device is busy
 
-            ML_LOG(Error, "%s: MLGraphicsBeginFrame failed with %d", APP_NAME, frame_result);
+            ML_LOG_TAG(Error, APP_TAG, "MLGraphicsBeginFrame failed with %d", frame_result);
             quit = true;
 
         }
@@ -391,7 +394,7 @@ int main () {
 
         for (int k = 0; k < MLInput_MaxControllers; ++k) {
             if (input_states[k].button_state[MLInputControllerButton_Bumper]) {
-                ML_LOG(Info, "%s: Bye!", APP_NAME);
+                ML_LOG_TAG(Info, APP_TAG, "Bye!");
                 quit = true;
                 break;
             }
@@ -411,7 +414,7 @@ int main () {
     MLHeadTrackingDestroy(head_tracking);
     MLPerceptionShutdown();
 
-    ML_LOG(Info, "%s: Finished.", APP_NAME);
+    ML_LOG_TAG(Info, APP_TAG, "Finished.");
 
 }
 
