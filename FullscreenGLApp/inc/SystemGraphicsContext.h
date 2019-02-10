@@ -3,6 +3,13 @@
 
 #include <glad/glad.h> // Generated at https://glad.dav1d.de/
 
+// Note: USE_GLFW isn't a standard built-in #define that mabu provides or 
+// anything like that. It's set up in glfw.comp, which is included via the
+// .mabu file USES statement. Also, note that VS doesn't seem to be aware
+// of #defines set in .mabu/.comp/.package files so if you select a host
+// target in VS, don't be surprised if the VS editor still makes it look like
+// USE_GLFW is undefined.
+
 #if USE_GLFW
 #  include <GLFW/glfw3.h>
 #else
