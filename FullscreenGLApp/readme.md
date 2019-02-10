@@ -5,6 +5,10 @@ Built for ML SDK 0.19.0. Include VS 2017 project files, but should build fine wi
 
 **You'll have to update MLCERT in the package file to specify your own certificate, or remove the line and use the -s option to mabu.**
 
+**Also, if you are doing a host build, you'll have to update glfw.comp to specify your GLFW installation path.**
+
+While having to update these source controlled files isn't ideal, I'm not sure of another solution. Follow [this forum post](https://forum.magicleap.com/hc/en-us/community/posts/360040900451) for progress here.
+
 About This Example
 -
 

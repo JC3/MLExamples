@@ -214,6 +214,7 @@
     <ClInclude Include="inc\KHR\khrplatform.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="glfw.comp" />
     <None Include="manifest.xml" />
     <None Include="FullscreenGLApp.mabu" />
   </ItemGroup>
@@ -222,7 +223,7 @@
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties MLProjectMabuSyncTime="131938212692356846 (2/5/2019 6:21:09 AM UTC)" />
+      <UserProperties MLProjectMabuSyncTime="131942489931320286 (2/10/2019 5:09:53 AM UTC)" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

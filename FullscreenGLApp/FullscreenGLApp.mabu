@@ -7,6 +7,5 @@ OPTIONS = \
 	standard-c++/11 \
 	stl/libgnustl
 
-USES = ml_sdk OpenGL stdc++
+USES = ml_sdk OpenGL stdc++ glfw
 SHLIBS = ml_privileges
-

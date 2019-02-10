@@ -14,10 +14,16 @@
 // ---------------------------------------------------------------------
 // %BANNER_END%
 
-#include <EGL/egl.h>
-#include <EGL/eglext.h>
-
 #include <glad/glad.h> // Generated at https://glad.dav1d.de/
+
+#if USE_GLFW
+#  include <GLFW/glfw3.h>
+#  define SYSTEM_GRAPHICS_GETPROCADDRESS ((GLADloadproc)glfwGetProcAddress)
+#else
+#  include <EGL/egl.h>
+#  include <EGL/eglext.h>
+#  define SYSTEM_GRAPHICS_GETPROCADDRESS ((GLADloadproc)eglGetProcAddress)
+#endif
 
 #include <runtime/external/glm/glm.hpp>
 #include <runtime/external/glm/gtx/quaternion.hpp>
@@ -50,8 +56,12 @@
 
 class SystemGraphicsContext {
 private:
+#if USE_GLFW
+    GLFWwindow *window;
+#else
     EGLDisplay egl_display;
     EGLContext egl_context;
+#endif
 public:
     SystemGraphicsContext();
     ~SystemGraphicsContext() { cleanup(); }
@@ -61,6 +71,45 @@ public:
     void unmakeCurrent();
     MLHandle context() const;
 };
+
+#if USE_GLFW
+
+SystemGraphicsContext::SystemGraphicsContext() {
+
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+
+    // We open a 1x1 window here -- this is not where the action happens, however;
+    // this program renders to a texture.  This is done merely to make GL happy.
+    window = glfwCreateWindow(1, 1, "SystemGraphicsContext_DummyWindow", NULL, NULL);
+
+}
+
+void SystemGraphicsContext::makeCurrent() {
+    glfwMakeContextCurrent(window);
+}
+
+void SystemGraphicsContext::unmakeCurrent() {
+}
+
+void SystemGraphicsContext::swapBuffers() {
+    glfwSwapBuffers(window);
+}
+
+void SystemGraphicsContext::cleanup() {
+    if (window) {
+        glfwDestroyWindow(window);
+        window = NULL;
+    }
+}
+
+MLHandle SystemGraphicsContext::context() const {
+    return (MLHandle)glfwGetCurrentContext();
+}
+
+#else
 
 SystemGraphicsContext::SystemGraphicsContext() {
     egl_display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -115,6 +164,8 @@ void SystemGraphicsContext::cleanup() {
 MLHandle SystemGraphicsContext::context() const {
     return (MLHandle)egl_context;
 }
+
+#endif
 
 
 //-----------------------------------------------------------------------------
@@ -199,8 +250,8 @@ int main () {
     SystemGraphicsContext graphics_context; // constructor inits a context
     graphics_context.makeCurrent();
 
-    // A GL context *must* be current for this to succeed! 
-    if (!gladLoadGLLoader((GLADloadproc)eglGetProcAddress)) {
+    // A GL context *must* be current for this to succeed!     
+    if (!gladLoadGLLoader(SYSTEM_GRAPHICS_GETPROCADDRESS)) {
         ML_LOG_TAG(Error, APP_TAG, "GL loader failed.");
         return -1;
     }
@@ -275,7 +326,7 @@ int main () {
                 query.bounds_rotation = ht_transform.rotation;
                 query.flags = MLPlanesQueryFlag_AllOrientations | MLPlanesQueryFlag_Semantic_All;
                 query.max_results = sizeof(query_results) / sizeof(MLPlane);
-                query.min_plane_area = 0.2;
+                query.min_plane_area = 0.2f;
 
                 CHECK(MLPlanesQueryBegin(planes, &query, &planes_query));
 
@@ -294,12 +345,12 @@ int main () {
 
         MLGraphicsFrameParams frame_params;
         CHECK(MLGraphicsInitFrameParams(&frame_params));
-        frame_params.near_clip = 0.1;
-        frame_params.far_clip = 100.0;
-        frame_params.focus_distance = 1.0;
+        frame_params.near_clip = 0.1f;
+        frame_params.far_clip = 100.0f;
+        frame_params.focus_distance = 1.0f;
         frame_params.projection_type = MLGraphicsProjectionType_SignedZ;
         frame_params.protected_surface = false;
-        frame_params.surface_scale = 1.0;
+        frame_params.surface_scale = 1.0f;
 
         MLHandle frame;
         MLGraphicsVirtualCameraInfoArray cameras;
@@ -336,7 +387,8 @@ int main () {
                 glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, cameras.depth_id, 0, camera.virtual_camera_name);
 
                 // Viewport is common to all cameras and is given.
-                glViewport(cameras.viewport.x, cameras.viewport.y, cameras.viewport.w, cameras.viewport.h);
+                glViewport((int)(cameras.viewport.x + 0.5f), (int)(cameras.viewport.y + 0.5f), 
+                           (GLsizei)(cameras.viewport.w + 0.5f), (GLsizei)(cameras.viewport.h + 0.5f));
 
                 // Projection matrix is given directly for each camera.
                 glMatrixMode(GL_PROJECTION);
@@ -482,23 +534,23 @@ void drawPlanes(const MLPlane *p, int np) {
         // 8cm grid in plane.
         glBlendColor(0, 0, 0, 0.25);
         glBegin(GL_LINES);
-        for (float x = -hw + 0.08; x < hw; x += 0.08) {
+        for (float x = -hw + 0.08f; x < hw; x += 0.08f) {
             glVertex2f(x, -hh);
             glVertex2f(x, hh);
         }
-        for (float y = -hh + 0.08; y < hh; y += 0.08) {
+        for (float y = -hh + 0.08f; y < hh; y += 0.08f) {
             glVertex2f(-hw, y);
             glVertex2f(hw, y);
         }
         glEnd();
         
-        // And draw its normal in the center, yellow -> white.
+        // And draw its normal in the center, white -> yellow.
         glBlendColor(0, 0, 0, 1);
         glBegin(GL_LINES);
         glColor3f(1, 1, 1);
         glVertex3f(0, 0, 0);
         glColor3f(1, 1, 0);
-        glVertex3f(0, 0, 0.1);
+        glVertex3f(0, 0, 0.1f);
         glEnd();
 
         glPopMatrix();
