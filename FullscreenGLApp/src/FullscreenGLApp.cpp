@@ -50,10 +50,10 @@ const MLPrivilegeID REQUIRED_PRIVILEGES[] = {
     } \
 } while (0)
 
-void drawPlanes(const MLPlane *p, int np);
+static void drawPlanes(const MLPlane *p, int np);
 
 /** Converts an MLTransform to a GLM matrix. */
-glm::mat4 mlToGL(const MLTransform &ml) {
+static glm::mat4 mlToGL(const MLTransform &ml) {
 
     glm::quat q;
     q.w = ml.rotation.w;
@@ -73,6 +73,7 @@ int main () {
     // ==== INITIALIZE ========================================================
     
     // ---- Lifecycle
+
     ML_LOG_TAG(Info, APP_TAG, "Initializing...");
     CHECK(MLLifecycleInit(NULL, NULL));
 
@@ -94,7 +95,9 @@ int main () {
     // ---- Head Tracking
 
     MLHandle head_tracking;
+    MLHeadTrackingStaticData head_sdata;
     CHECK(MLHeadTrackingCreate(&head_tracking));
+    CHECK(MLHeadTrackingGetStaticData(head_tracking, &head_sdata));
 
     // ---- Plane Tracking
 
@@ -164,15 +167,14 @@ int main () {
             CHECK(MLPerceptionGetSnapshot(&snapshot));
 
             MLHeadTrackingState ht_state;
-            MLHeadTrackingStaticData ht_data;
             MLTransform ht_transform;
 
-            bool ht_valid = (MLHeadTrackingGetState(head_tracking, &ht_state) == MLResult_Ok) &&
+            bool ht_valid = 
+                (MLHeadTrackingGetState(head_tracking, &ht_state) == MLResult_Ok) &&
                 (ht_state.error == MLHeadTrackingError_None) &&
                 (ht_state.mode == MLHeadTrackingMode_6DOF) &&
                 (ht_state.confidence > 0.9) &&
-                (MLHeadTrackingGetStaticData(head_tracking, &ht_data) == MLResult_Ok) &&
-                (MLSnapshotGetTransform(snapshot, &ht_data.coord_frame_head, &ht_transform) == MLResult_Ok);
+                (MLSnapshotGetTransform(snapshot, &head_sdata.coord_frame_head, &ht_transform) == MLResult_Ok);
 
             CHECK(MLPerceptionReleaseSnapshot(snapshot));
 
@@ -339,7 +341,7 @@ int main () {
  */
 //-----------------------------------------------------------------------------
 
-void drawPlanes(const MLPlane *p, int np) {
+static void drawPlanes(const MLPlane *p, int np) {
 
     // If no planes found, just turn the screen red. This is easier to see
     // than log messages, and simpler than setting controller LEDs.
