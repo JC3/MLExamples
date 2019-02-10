@@ -207,11 +207,12 @@
   <ItemGroup>
     <ClCompile Include="src/FullscreenGLApp.cpp" />
     <ClCompile Include="src\glad.c" />
+    <ClCompile Include="src\SystemGraphicsContext.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="inc/FullscreenGLApp.h" />
     <ClInclude Include="inc\glad\glad.h" />
     <ClInclude Include="inc\KHR\khrplatform.h" />
+    <ClInclude Include="inc\SystemGraphicsContext.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glfw.comp" />
@@ -223,7 +224,7 @@
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties MLProjectMabuSyncTime="131942489931320286 (2/10/2019 5:09:53 AM UTC)" />
+      <UserProperties MLProjectMabuSyncTime="131942888611310531 (2/10/2019 4:14:21 PM UTC)" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

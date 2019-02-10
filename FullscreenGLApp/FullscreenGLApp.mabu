@@ -1,5 +1,6 @@
 KIND = program
 SRCS = src/FullscreenGLApp.cpp \
+       src/SystemGraphicsContext.cpp \
 	   src/glad.c
 INCS = inc/
 

@@ -13,23 +13,32 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>bmp;gif;jpg;jpeg;png;wav;mp4;axf</Extensions>
     </Filter>
+    <Filter Include="Header Files\GLAD">
+      <UniqueIdentifier>{148f9782-3f0f-4b06-9468-b10aaf174df0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GLAD">
+      <UniqueIdentifier>{67c563ed-aba0-4a10-8c38-26bcbc0f2cb1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src/FullscreenGLApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\glad.c">
+      <Filter>Source Files\GLAD</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SystemGraphicsContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="inc/FullscreenGLApp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="inc\glad\glad.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GLAD</Filter>
     </ClInclude>
     <ClInclude Include="inc\KHR\khrplatform.h">
+      <Filter>Header Files\GLAD</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\SystemGraphicsContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
