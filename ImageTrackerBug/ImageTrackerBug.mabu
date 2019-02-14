@@ -1,0 +1,13 @@
+INCS = inc/
+KIND = program
+OPTIONS = \
+	standard-c++/11 \
+	stl/libgnustl
+
+SRCS = src/ImageTrackerBug.cpp
+USES = \
+	ml_sdk \
+	stdc++
+
+SHLIBS = ml_privileges
+

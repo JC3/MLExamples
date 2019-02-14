@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FullscreenGLApp", "FullscreenGLApp\FullscreenGLApp.vcxproj", "{D76A984E-2CCC-4F0D-8233-E8974DA4656D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImageTrackerBug", "ImageTrackerBug\ImageTrackerBug.vcxproj", "{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ML = Debug|ML
@@ -21,6 +23,14 @@ Global
 		{D76A984E-2CCC-4F0D-8233-E8974DA4656D}.Release|ML.Build.0 = Release|ML
 		{D76A984E-2CCC-4F0D-8233-E8974DA4656D}.Release|x64.ActiveCfg = Release|x64
 		{D76A984E-2CCC-4F0D-8233-E8974DA4656D}.Release|x64.Build.0 = Release|x64
+		{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}.Debug|ML.ActiveCfg = Debug|ML
+		{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}.Debug|ML.Build.0 = Debug|ML
+		{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}.Debug|x64.ActiveCfg = Debug|x64
+		{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}.Debug|x64.Build.0 = Debug|x64
+		{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}.Release|ML.ActiveCfg = Release|ML
+		{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}.Release|ML.Build.0 = Release|ML
+		{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}.Release|x64.ActiveCfg = Release|x64
+		{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
