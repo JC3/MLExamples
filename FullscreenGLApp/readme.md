@@ -22,6 +22,8 @@ For more information see the following forum posts:
 - https://forum.magicleap.com/hc/en-us/community/posts/360040900451
 - https://forum.magicleap.com/hc/en-us/community/posts/360041538951
 
+If you're building from the command line, you'll have to set GLFW_INCS, GLFW_LIBS, and your certificate path (via -s) on the mabu command line.
+
 About This Example
 -
 
