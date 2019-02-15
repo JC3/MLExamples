@@ -3,11 +3,26 @@ FullscreenGLApp
 
 Built for ML SDK 0.19.0. Include VS 2017 project files, but should build fine with just mabu.
 
-**You'll have to update MLCERT in the package file to specify your own certificate, or remove the line and use the -s option to mabu.**
+**Note: This implements the workaround for a VS build option problem described in [this forum post](https://forum.magicleap.com/hc/en-us/community/posts/360040900451). If
+you start a new VS project and you wish to follow in this example's footsteps with environment variables and stuff, you'll have to hand edit your .vcxproj file according
+to that forum post. They say it'll be fixed in an upcoming API release so hopefully this is temporary.**
 
-**Also, if you are doing a host build, you'll have to update glfw.comp to specify your GLFW installation path.**
+Building
+-
 
-While having to update these source controlled files isn't ideal, I'm not sure of another solution. Follow [this forum post](https://forum.magicleap.com/hc/en-us/community/posts/360040900451) for progress here.
+When building from VS, you'll have to set the following environmnent variables before starting VS (Control Panel -> System -> Advanced -> Environment Variables):
+
+- GLFW_INCS: The path to your GLFW includes; only needed for host targets.
+- GLFW_LIBS: The path to your GLFW libraries; only needed for host targets.
+- MLCERT: The path to your developer certificate; only needed for device builds (note that if you've got a global certificate configured in VS, the VS extension may take
+it upon itself to add an MLCERT line to your .package file for you; I don't think it should cause problems but please let me know if it does).
+
+For more information see the following forum posts:
+
+- https://forum.magicleap.com/hc/en-us/community/posts/360040900451
+- https://forum.magicleap.com/hc/en-us/community/posts/360041538951
+
+If you're building from the command line, you'll have to set GLFW_INCS, GLFW_LIBS, and your certificate path (via -s) on the mabu command line.
 
 About This Example
 -
