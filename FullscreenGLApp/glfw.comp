@@ -3,8 +3,8 @@ DEFS.win = ML_WINDOWS USE_GLFW=1
 DEFS.osx = ML_OSX USE_GLFW=1
 DEFS.linux = ML_LINUX USE_GLFW=1
 
-LIBPATHS.win,osx,linux=C:\Users\Jason\Packages\mldeps\glfw-3.2.1\lib-vc2015
-INCS.win,osx,linux=C:\Users\Jason\Packages\mldeps\glfw-3.2.1\include
+LIBPATHS.win,osx,linux=$(GLFW_LIBS)
+INCS.win,osx,linux=$(GLFW_INCS)
 
 SHLIBS.win=glfw3dll
 SHLIBS.osx=glfw.3

@@ -87,8 +87,7 @@
     <MLCertificateFile>
     </MLCertificateFile>
     <!--This should appear before <NMakeBuildCommandLine> -->
-    <MLExtraBuildOption>
-    </MLExtraBuildOption>
+    <MLExtraBuildOption>"GLFW_INCS=$(GLFW_INCS)" "GLFW_LIBS=$(GLFW_LIBS)" -s "$(MLCERT)"</MLExtraBuildOption>
     <MabuTargetFullSpec>debug_lumin_clang-3.8_aarch64</MabuTargetFullSpec>
     <ExecutablePath>$(MLSDK);$(PATH)</ExecutablePath>
     <IncludePath />
@@ -119,8 +118,7 @@
     <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.19.0</MLSDK>
     <MLCertificateFile>
     </MLCertificateFile>
-    <MLExtraBuildOption>
-    </MLExtraBuildOption>
+    <MLExtraBuildOption>"GLFW_INCS=$(GLFW_INCS)" "GLFW_LIBS=$(GLFW_LIBS)" -s "$(MLCERT)"</MLExtraBuildOption>
     <MabuTargetFullSpec>release_lumin_clang-3.8_aarch64</MabuTargetFullSpec>
     <ExecutablePath>$(MLSDK);$(PATH)</ExecutablePath>
     <IncludePath />
@@ -152,16 +150,15 @@
     <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.19.0</MLSDK>
     <MLCertificateFile>
     </MLCertificateFile>
-    <MLExtraBuildOption>
-    </MLExtraBuildOption>
+    <MLExtraBuildOption>"GLFW_INCS=$(GLFW_INCS)" "GLFW_LIBS=$(GLFW_LIBS)" -s "$(MLCERT)"</MLExtraBuildOption>
     <MabuTargetFullSpec>debug_win_msvc-2017_x64</MabuTargetFullSpec>
     <ExecutablePath>$(MLSDK);$(PATH)</ExecutablePath>
-    <NMakeBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_debug -v VCDIR="$(VCInstallDir) $(MLExtraBuildOption)</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_debug -r -v VCDIR="$(VCInstallDir) $(MLExtraBuildOption)</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_debug -c -v VCDIR="$(VCInstallDir) $(MLExtraBuildOption)</NMakeCleanCommandLine>
+    <NMakeBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_debug -v $(MLExtraBuildOption)</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_debug -r -v $(MLExtraBuildOption)</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_debug -c -v $(MLExtraBuildOption)</NMakeCleanCommandLine>
     <NMakePreprocessorDefinitions>
     </NMakePreprocessorDefinitions>
-    <NMakeIncludeSearchPath>C:Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include;C:Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt;C:Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um;C:\Users\Jason\MagicLeap\mlsdk\v0.19.0\include;C:\Users\Jason\source\repos\MLExamples\FullscreenGLApp\inc</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath>.;C:Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include;C:Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt;C:Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um;C:\Users\Jason\MagicLeap\mlsdk\v0.19.0\include;C:\Users\Jason\source\repos\MLExamples\FullscreenGLApp\inc</NMakeIncludeSearchPath>
     <PackageFile>.out/FullscreenGLApp/FullscreenGLApp.mpk</PackageFile>
     <IntDir>.out\debug_win_msvc-2017_x64</IntDir>
     <OutDir>$(ProjectDir)\$(IntDir)</OutDir>
@@ -179,13 +176,12 @@
     <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.19.0</MLSDK>
     <MLCertificateFile>
     </MLCertificateFile>
-    <MLExtraBuildOption>
-    </MLExtraBuildOption>
+    <MLExtraBuildOption>"GLFW_INCS=$(GLFW_INCS)" "GLFW_LIBS=$(GLFW_LIBS)" -s "$(MLCERT)"</MLExtraBuildOption>
     <MabuTargetFullSpec>release_win_msvc-2017_x64</MabuTargetFullSpec>
     <ExecutablePath>$(MLSDK);$(PATH)</ExecutablePath>
-    <NMakeBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_release -v VCDIR="$(VCInstallDir) $(MLExtraBuildOption)</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_release -r -v VCDIR="$(VCInstallDir) $(MLExtraBuildOption)</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_release -c -v VCDIR="$(VCInstallDir) $(MLExtraBuildOption)</NMakeCleanCommandLine>
+    <NMakeBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_release -v $(MLExtraBuildOption)</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_release -r -v $(MLExtraBuildOption)</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_release -c -v $(MLExtraBuildOption)</NMakeCleanCommandLine>
     <NMakePreprocessorDefinitions>
     </NMakePreprocessorDefinitions>
     <NMakeIncludeSearchPath>C:Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include;C:Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt;C:Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um;$(ProjectDir)\inc</NMakeIncludeSearchPath>
@@ -224,7 +220,7 @@
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties MLProjectMabuSyncTime="131942888611310531 (2/10/2019 4:14:21 PM UTC)" />
+      <UserProperties MLProjectMabuSyncTime="131947467248593599 (2/15/2019 11:25:24 PM UTC)" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
