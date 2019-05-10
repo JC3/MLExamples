@@ -5,7 +5,7 @@
 	ml:version_name="1.0">
 	<application
 		ml:visible_name="FullscreenGLApp"
-		ml:sdk_version="0.19.0"
+		ml:sdk_version="0.20.0"
 		ml:min_api_level="3">
     <uses-privilege ml:name="WorldReconstruction"/>
     <uses-privilege ml:name="LowLatencyLightwear"/>

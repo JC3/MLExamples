@@ -83,7 +83,7 @@
     </PropertyPageSchema>
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ML'">
-    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.19.0</MLSDK>
+    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.20.0</MLSDK>
     <MLCertificateFile>
     </MLCertificateFile>
     <!--This should appear before <NMakeBuildCommandLine> -->
@@ -115,7 +115,7 @@
     <MLDownloadOnStart>true</MLDownloadOnStart>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ML'">
-    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.19.0</MLSDK>
+    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.20.0</MLSDK>
     <MLCertificateFile>
     </MLCertificateFile>
     <MLExtraBuildOption>"GLFW_INCS=$(GLFW_INCS)" "GLFW_LIBS=$(GLFW_LIBS)" -s "$(MLCERT)"</MLExtraBuildOption>
@@ -147,7 +147,7 @@
     <MLDownloadOnStart>true</MLDownloadOnStart>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.19.0</MLSDK>
+    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.20.0</MLSDK>
     <MLCertificateFile>
     </MLCertificateFile>
     <MLExtraBuildOption>"GLFW_INCS=$(GLFW_INCS)" "GLFW_LIBS=$(GLFW_LIBS)" -s "$(MLCERT)"</MLExtraBuildOption>
@@ -173,7 +173,7 @@
     <LocalDebuggerWorkingDirectory>$(ProjectDir)\.out\FullscreenGLApp</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.19.0</MLSDK>
+    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.20.0</MLSDK>
     <MLCertificateFile>
     </MLCertificateFile>
     <MLExtraBuildOption>"GLFW_INCS=$(GLFW_INCS)" "GLFW_LIBS=$(GLFW_LIBS)" -s "$(MLCERT)"</MLExtraBuildOption>
@@ -220,7 +220,7 @@
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties MLProjectMabuSyncTime="131947467248593599 (2/15/2019 11:25:24 PM UTC)" />
+      <UserProperties MLProjectMabuSyncTime="132019764667884079 (5/10/2019 3:41:06 PM UTC)" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
