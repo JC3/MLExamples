@@ -6,11 +6,14 @@
 	<application
 		ml:visible_name="FullscreenGLApp"
 		ml:sdk_version="0.20.0"
-		ml:min_api_level="3">
+		ml:min_api_level="4">
     <uses-privilege ml:name="WorldReconstruction"/>
     <uses-privilege ml:name="LowLatencyLightwear"/>
+    <!-- At the time of this writing, the component name must be .fullscreen in order for
+         the app to correctly run in kiosk mode. 
+         See https://forum.magicleap.com/hc/en-us/community/posts/360043439711 -->
     <component
-			ml:name="FullscreenGLAppComponent"
+			ml:name=".fullscreen"
 			ml:visible_name="FullscreenGLApp"
 			ml:binary_name="bin/FullscreenGLApp"
 			ml:type="Fullscreen">
