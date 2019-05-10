@@ -1,7 +1,7 @@
 FullscreenGLApp
 =
 
-Built for ML SDK 0.19.0. Include VS 2017 project files, but should build fine with just mabu.
+Built for ML SDK 0.20.0. Include VS 2017 project files, but should build fine with just mabu.
 
 **Note: This implements the workaround for a VS build option problem described in [this forum post](https://forum.magicleap.com/hc/en-us/community/posts/360040900451). If
 you start a new VS project and you wish to follow in this example's footsteps with environment variables and stuff, you'll have to hand edit your .vcxproj file according
@@ -21,6 +21,7 @@ For more information see the following forum posts:
 
 - https://forum.magicleap.com/hc/en-us/community/posts/360040900451
 - https://forum.magicleap.com/hc/en-us/community/posts/360041538951
+- https://forum.magicleap.com/hc/en-us/community/posts/360043439711
 
 If you're building from the command line, you'll have to set GLFW_INCS, GLFW_LIBS, and your certificate path (via -s) on the mabu command line.
 
