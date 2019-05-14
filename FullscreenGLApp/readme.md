@@ -1,7 +1,9 @@
 FullscreenGLApp
 =
 
-Built for ML SDK 0.20.0. Include VS 2017 project files, but should build fine with just mabu.
+Built for ML SDK 0.20.0, also compatible with 0.19.0. Includes VS 2017 project files, but should build fine with just mabu.
+
+**Note: If you're using an SDK version besides 0.20.0, change ml:sdk_version in manifest.xml accordingly. See comment in manifest.xml.**
 
 **Note: This implements the workaround for a VS build option problem described in [this forum post](https://forum.magicleap.com/hc/en-us/community/posts/360040900451). If
 you start a new VS project and you wish to follow in this example's footsteps with environment variables and stuff, you'll have to hand edit your .vcxproj file according
