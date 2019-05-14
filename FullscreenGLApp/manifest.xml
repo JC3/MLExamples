@@ -1,16 +1,36 @@
+<!-- COMPATIBILITY:
+
+    This code has been tested against the following API and OS versions:
+    
+       0.19.0 (w/ Lumin 0.94.0 and 0.95.2)
+       0.20.0 (w/ Lumin 0.95.2)
+       
+    The minimum required API level for this example is 3 (SDK 0.19.0 or greater).
+    0.20.0 supports API level 4, but at the current time some users are  using the
+    0.19.0 SDK and so I'm leaving it at 3.
+    
+    If you are building with 0.19.0, just change ml:sdk_version to 0.19.0 below.
+    There's no need to tweak the API level.
+    
+    Issues/latest version: https://github.com/JC3/MLExamples
+    -->
+
 <manifest
 	xmlns:ml="magicleap"
 	ml:package="com.mlexamples.fullscreenglapp"
 	ml:version_code="1"
 	ml:version_name="1.0">
-	<application
+  <application
 		ml:visible_name="FullscreenGLApp"
-		ml:sdk_version="0.19.0"
+		ml:sdk_version="0.20.0"
 		ml:min_api_level="3">
     <uses-privilege ml:name="WorldReconstruction"/>
     <uses-privilege ml:name="LowLatencyLightwear"/>
+    <!-- At the time of this writing, the component name must be .fullscreen in order for
+         the app to correctly run in kiosk mode. 
+         See https://forum.magicleap.com/hc/en-us/community/posts/360043439711 -->
     <component
-			ml:name="FullscreenGLAppComponent"
+			ml:name=".fullscreen"
 			ml:visible_name="FullscreenGLApp"
 			ml:binary_name="bin/FullscreenGLApp"
 			ml:type="Fullscreen">

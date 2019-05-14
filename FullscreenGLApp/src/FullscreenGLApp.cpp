@@ -199,7 +199,7 @@ int main () {
         
         // If a plane query is running, retrieve the results if its ready.
         if (planes_query != ML_INVALID_HANDLE &&
-            MLPlanesQueryGetResults(planes, planes_query, query_results, &query_nresults) == MLResult_Ok) 
+            MLPlanesQueryGetResultsWithBoundaries(planes, planes_query, query_results, &query_nresults, NULL) == MLResult_Ok) 
         {
             planes_query = ML_INVALID_HANDLE;
         }
