@@ -1,0 +1,5 @@
+KIND = program
+OPTIONS = standard-c++/11 stl/libgnustl
+SRCS = main.cpp
+USES = ml_sdk stdc++
+SHLIBS = ml_privileges

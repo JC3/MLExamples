@@ -1,0 +1,1 @@
+Example for https://forum.magicleap.com/hc/en-us/community/posts/360043657652-Bug-Camera-access-denied-in-kiosk-mode

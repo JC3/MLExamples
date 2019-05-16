@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ML">
+      <Configuration>Debug</Configuration>
+      <Platform>ML</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ML">
+      <Configuration>Release</Configuration>
+      <Platform>ML</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <!-- Project global & default -->
+    <ProjectGuid>{4106B3FD-533A-406A-97C6-F4287A0037AD}</ProjectGuid>
+    <MLProjectFile>KioskIssue.package</MLProjectFile>
+    <MLProjectKind>program</MLProjectKind>
+    <MLMfitExtraArgs>
+    </MLMfitExtraArgs>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectCapability Include="MLProject" />
+    <ProjectCapability Include="NoVCDefaultBuildUpToDateCheckProvider" />
+  </ItemGroup>
+  <PropertyGroup>
+    <PlatformTargetsFound>True</PlatformTargetsFound>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ML'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ML'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <UseDefaultDebuggersPropertyPageSchemas>false</UseDefaultDebuggersPropertyPageSchemas>
+    <UseDefaultPropertyPageSchemas>false</UseDefaultPropertyPageSchemas>
+  </PropertyGroup>
+  <ItemGroup>
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\ProjectItemsSchema.xml" />
+    <PropertyPageSchema Include="$(LOCALAPPDATA)\Microsoft\VisualStudio\MagicLeap\general.xaml">
+      <Context>Project</Context>
+    </PropertyPageSchema>
+    <PropertyPageSchema Include="$(LOCALAPPDATA)\Microsoft\VisualStudio\MagicLeap\build.xaml" />
+    <!-- Don't expose these to user any more as they are of little value to user... 04/11/17
+    <PropertyPageSchema Include="$(LOCALAPPDATA)\Microsoft\VisualStudio\MagicLeap\intellisense.xaml" />
+    -->
+    <!--Only show this page if the project is to create a package. -->
+    <PropertyPageSchema Condition="$([System.String]::copy($(MLProjectFile)).ToLower().EndsWith('.package'))" Include="$(LOCALAPPDATA)\Microsoft\VisualStudio\MagicLeap\package_signing.xaml" />
+    <PropertyPageSchema Include="$(LOCALAPPDATA)\Microsoft\VisualStudio\MagicLeap\build_events.xml" />
+    <PropertyPageSchema Condition="'$(MLProjectKind)' == 'program'" Include="&#xA;                        $(VCTargetsPath)$(LangID)\debugger_general.xml;&#xA;                        $(VCTargetsPath)$(LangID)\debugger_local_windows.xml;&#xA;                        $(LOCALAPPDATA)\Microsoft\VisualStudio\MagicLeap\debugger.xaml" />
+    <!-- Property sheet only rules -->
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\general_makefile_ps.xml;$(VCTargetsPath)$(LangID)\usermacros.xml">
+      <Context>PropertySheet</Context>
+    </PropertyPageSchema>
+    <!-- File only rules -->
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\general_file.xml">
+      <Context>File</Context>
+    </PropertyPageSchema>
+  </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ML'">
+    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.20.0</MLSDK>
+    <MLCertificateFile>
+    </MLCertificateFile>
+    <!--This should appear before <NMakeBuildCommandLine> -->
+    <MLExtraBuildOption>
+    </MLExtraBuildOption>
+    <MabuTargetFullSpec>debug_lumin_clang-3.8_aarch64</MabuTargetFullSpec>
+    <ExecutablePath>$(MLSDK);$(PATH)</ExecutablePath>
+    <IncludePath />
+    <ReferencePath>
+    </ReferencePath>
+    <LibraryPath>
+    </LibraryPath>
+    <NMakeBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t device_debug -v --set-options=ide/visualstudio $(MLExtraBuildOption)</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t device_debug -r -v --set-options=ide/visualstudio $(MLExtraBuildOption)</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t device_debug -c -v --set-options=ide/visualstudio $(MLExtraBuildOption)</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>_GNU_SOURCE=1;_LP64=1;__AARCH64EL__=1;__ANDROID__=1;__ARM_64BIT_STATE=1;__ARM_ACLE=200;__ARM_ALIGN_MAX_STACK_PWR=4;__ARM_ARCH=8;__ARM_ARCH_ISA_A64=1;__ARM_ARCH_PROFILE='A';__ARM_FEATURE_CLZ=1;__ARM_FEATURE_DIRECTED_ROUNDING=1;__ARM_FEATURE_DIV=1;__ARM_FEATURE_FMA=1;__ARM_FEATURE_IDIV=1;__ARM_FEATURE_LDREX=0xF;__ARM_FEATURE_NUMERIC_MAXMIN=1;__ARM_FEATURE_UNALIGNED=1;__ARM_FP16_ARGS=1;__ARM_FP16_FORMAT_IEEE=1;__ARM_FP=0xE;__ARM_NEON=1;__ARM_NEON_FP=0xE;__ARM_PCS_AAPCS64=1;__ARM_SIZEOF_MINIMAL_ENUM=4;__ARM_SIZEOF_WCHAR_T=4;__ATOMIC_ACQUIRE=2;__ATOMIC_ACQ_REL=4;__ATOMIC_CONSUME=1;__ATOMIC_RELAXED=0;__ATOMIC_RELEASE=3;__ATOMIC_SEQ_CST=5;__BIGGEST_ALIGNMENT__=16;__BYTE_ORDER__=__ORDER_LITTLE_ENDIAN__;__CHAR16_TYPE__=unsigned short;__CHAR32_TYPE__=unsigned int;__CHAR_BIT__=8;__CHAR_UNSIGNED__=1;__CONSTANT_CFSTRINGS__=1;__DBL_DECIMAL_DIG__=17;__DBL_DENORM_MIN__=4.9406564584124654e-324;__DBL_DIG__=15;__DBL_EPSILON__=2.2204460492503131e-16;__DBL_HAS_DENORM__=1;__DBL_HAS_INFINITY__=1;__DBL_HAS_QUIET_NAN__=1;__DBL_MANT_DIG__=53;__DBL_MAX_10_EXP__=308;__DBL_MAX_EXP__=1024;__DBL_MAX__=1.7976931348623157e+308;__DBL_MIN_10_EXP__=(-307);__DBL_MIN_EXP__=(-1021);__DBL_MIN__=2.2250738585072014e-308;__DECIMAL_DIG__=__LDBL_DECIMAL_DIG__;__DEPRECATED=1;__ELF__=1;__EXCEPTIONS=1;__FINITE_MATH_ONLY__=0;__FLT_DECIMAL_DIG__=9;__FLT_DENORM_MIN__=1.40129846e-45F;__FLT_DIG__=6;__FLT_EPSILON__=1.19209290e-7F;__FLT_EVAL_METHOD__=0;__FLT_HAS_DENORM__=1;__FLT_HAS_INFINITY__=1;__FLT_HAS_QUIET_NAN__=1;__FLT_MANT_DIG__=24;__FLT_MAX_10_EXP__=38;__FLT_MAX_EXP__=128;__FLT_MAX__=3.40282347e+38F;__FLT_MIN_10_EXP__=(-37);__FLT_MIN_EXP__=(-125);__FLT_MIN__=1.17549435e-38F;__FLT_RADIX__=2;__GCC_ATOMIC_BOOL_LOCK_FREE=2;__GCC_ATOMIC_CHAR16_T_LOCK_FREE=2;__GCC_ATOMIC_CHAR32_T_LOCK_FREE=2;__GCC_ATOMIC_CHAR_LOCK_FREE=2;__GCC_ATOMIC_INT_LOCK_FREE=2;__GCC_ATOMIC_LLONG_LOCK_FREE=2;__GCC_ATOMIC_LONG_LOCK_FREE=2;__GCC_ATOMIC_POINTER_LOCK_FREE=2;__GCC_ATOMIC_SHORT_LOCK_FREE=2;__GCC_ATOMIC_TEST_AND_SET_TRUEVAL=1;__GCC_ATOMIC_WCHAR_T_LOCK_FREE=2;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1=1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2=1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4=1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_8=1;__GNUC_GNU_INLINE__=1;__GNUC_MINOR__=2;__GNUC_PATCHLEVEL__=1;__GNUC__=4;__GNUG__=4;__GXX_ABI_VERSION=1002;__GXX_EXPERIMENTAL_CXX0X__=1;__GXX_RTTI=1;__GXX_WEAK__=1;__INT16_C_SUFFIX__;__INT16_FMTd__="hd";__INT16_FMTi__="hi";__INT16_MAX__=32767;__INT16_TYPE__=short;__INT32_C_SUFFIX__;__INT32_FMTd__="d";__INT32_FMTi__="i";__INT32_MAX__=2147483647;__INT32_TYPE__=int;__INT64_C_SUFFIX__=L;__INT64_FMTd__="ld";__INT64_FMTi__="li";__INT64_MAX__=9223372036854775807L;__INT64_TYPE__=long int;__INT8_C_SUFFIX__;__INT8_FMTd__="hhd";__INT8_FMTi__="hhi";__INT8_MAX__=127;__INT8_TYPE__=signed char;__INTMAX_C_SUFFIX__=L;__INTMAX_FMTd__="ld";__INTMAX_FMTi__="li";__INTMAX_MAX__=9223372036854775807L;__INTMAX_TYPE__=long int;__INTMAX_WIDTH__=64;__INTPTR_FMTd__="ld";__INTPTR_FMTi__="li";__INTPTR_MAX__=9223372036854775807L;__INTPTR_TYPE__=long int;__INTPTR_WIDTH__=64;__INT_FAST16_FMTd__="hd";__INT_FAST16_FMTi__="hi";__INT_FAST16_MAX__=32767;__INT_FAST16_TYPE__=short;__INT_FAST32_FMTd__="d";__INT_FAST32_FMTi__="i";__INT_FAST32_MAX__=2147483647;__INT_FAST32_TYPE__=int;__INT_FAST64_FMTd__="ld";__INT_FAST64_FMTi__="li";__INT_FAST64_MAX__=9223372036854775807L;__INT_FAST64_TYPE__=long int;__INT_FAST8_FMTd__="hhd";__INT_FAST8_FMTi__="hhi";__INT_FAST8_MAX__=127;__INT_FAST8_TYPE__=signed char;__INT_LEAST16_FMTd__="hd";__INT_LEAST16_FMTi__="hi";__INT_LEAST16_MAX__=32767;__INT_LEAST16_TYPE__=short;__INT_LEAST32_FMTd__="d";__INT_LEAST32_FMTi__="i";__INT_LEAST32_MAX__=2147483647;__INT_LEAST32_TYPE__=int;__INT_LEAST64_FMTd__="ld";__INT_LEAST64_FMTi__="li";__INT_LEAST64_MAX__=9223372036854775807L;__INT_LEAST64_TYPE__=long int;__INT_LEAST8_FMTd__="hhd";__INT_LEAST8_FMTi__="hhi";__INT_LEAST8_MAX__=127;__INT_LEAST8_TYPE__=signed char;__INT_MAX__=2147483647;__LDBL_DECIMAL_DIG__=36;__LDBL_DENORM_MIN__=6.47517511943802511092443895822764655e-4966L;__LDBL_DIG__=33;__LDBL_EPSILON__=1.92592994438723585305597794258492732e-34L;__LDBL_HAS_DENORM__=1;__LDBL_HAS_INFINITY__=1;__LDBL_HAS_QUIET_NAN__=1;__LDBL_MANT_DIG__=113;__LDBL_MAX_10_EXP__=4932;__LDBL_MAX_EXP__=16384;__LDBL_MAX__=1.18973149535723176508575932662800702e+4932L;__LDBL_MIN_10_EXP__=(-4931);__LDBL_MIN_EXP__=(-16381);__LDBL_MIN__=3.36210314311209350626267781732175260e-4932L;__LITTLE_ENDIAN__=1;__LONG_LONG_MAX__=9223372036854775807LL;__LONG_MAX__=9223372036854775807L;__LP64__=1;__NO_INLINE__=1;__ORDER_BIG_ENDIAN__=4321;__ORDER_LITTLE_ENDIAN__=1234;__ORDER_PDP_ENDIAN__=3412;__PIC__=1;__POINTER_WIDTH__=64;__PRAGMA_REDEFINE_EXTNAME=1;__PTRDIFF_FMTd__="ld";__PTRDIFF_FMTi__="li";__PTRDIFF_MAX__=9223372036854775807L;__PTRDIFF_TYPE__=long int;__PTRDIFF_WIDTH__=64;__SCHAR_MAX__=127;__SHRT_MAX__=32767;__SIG_ATOMIC_MAX__=2147483647;__SIG_ATOMIC_WIDTH__=32;__SIZEOF_DOUBLE__=8;__SIZEOF_FLOAT__=4;__SIZEOF_INT128__=16;__SIZEOF_INT__=4;__SIZEOF_LONG_DOUBLE__=16;__SIZEOF_LONG_LONG__=8;__SIZEOF_LONG__=8;__SIZEOF_POINTER__=8;__SIZEOF_PTRDIFF_T__=8;__SIZEOF_SHORT__=2;__SIZEOF_SIZE_T__=8;__SIZEOF_WCHAR_T__=4;__SIZEOF_WINT_T__=4;__SIZE_FMTX__="lX";__SIZE_FMTo__="lo";__SIZE_FMTu__="lu";__SIZE_FMTx__="lx";__SIZE_MAX__=18446744073709551615UL;__SIZE_TYPE__=long unsigned int;__SIZE_WIDTH__=64;__STDC_HOSTED__=1;__STDC_UTF_16__=1;__STDC_UTF_32__=1;__STDC__=1;__STRICT_ANSI__=1;__UINT16_C_SUFFIX__;__UINT16_FMTX__="hX";__UINT16_FMTo__="ho";__UINT16_FMTu__="hu";__UINT16_FMTx__="hx";__UINT16_MAX__=65535;__UINT16_TYPE__=unsigned short;__UINT32_C_SUFFIX__=U;__UINT32_FMTX__="X";__UINT32_FMTo__="o";__UINT32_FMTu__="u";__UINT32_FMTx__="x";__UINT32_MAX__=4294967295U;__UINT32_TYPE__=unsigned int;__UINT64_C_SUFFIX__=UL;__UINT64_FMTX__="lX";__UINT64_FMTo__="lo";__UINT64_FMTu__="lu";__UINT64_FMTx__="lx";__UINT64_MAX__=18446744073709551615UL;__UINT64_TYPE__=long unsigned int;__UINT8_C_SUFFIX__;__UINT8_FMTX__="hhX";__UINT8_FMTo__="hho";__UINT8_FMTu__="hhu";__UINT8_FMTx__="hhx";__UINT8_MAX__=255;__UINT8_TYPE__=unsigned char;__UINTMAX_C_SUFFIX__=UL;__UINTMAX_FMTX__="lX";__UINTMAX_FMTo__="lo";__UINTMAX_FMTu__="lu";__UINTMAX_FMTx__="lx";__UINTMAX_MAX__=18446744073709551615UL;__UINTMAX_TYPE__=long unsigned int;__UINTMAX_WIDTH__=64;__UINTPTR_FMTX__="lX";__UINTPTR_FMTo__="lo";__UINTPTR_FMTu__="lu";__UINTPTR_FMTx__="lx";__UINTPTR_MAX__=18446744073709551615UL;__UINTPTR_TYPE__=long unsigned int;__UINTPTR_WIDTH__=64;__UINT_FAST16_FMTX__="hX";__UINT_FAST16_FMTo__="ho";__UINT_FAST16_FMTu__="hu";__UINT_FAST16_FMTx__="hx";__UINT_FAST16_MAX__=65535;__UINT_FAST16_TYPE__=unsigned short;__UINT_FAST32_FMTX__="X";__UINT_FAST32_FMTo__="o";__UINT_FAST32_FMTu__="u";__UINT_FAST32_FMTx__="x";__UINT_FAST32_MAX__=4294967295U;__UINT_FAST32_TYPE__=unsigned int;__UINT_FAST64_FMTX__="lX";__UINT_FAST64_FMTo__="lo";__UINT_FAST64_FMTu__="lu";__UINT_FAST64_FMTx__="lx";__UINT_FAST64_MAX__=18446744073709551615UL;__UINT_FAST64_TYPE__=long unsigned int;__UINT_FAST8_FMTX__="hhX";__UINT_FAST8_FMTo__="hho";__UINT_FAST8_FMTu__="hhu";__UINT_FAST8_FMTx__="hhx";__UINT_FAST8_MAX__=255;__UINT_FAST8_TYPE__=unsigned char;__UINT_LEAST16_FMTX__="hX";__UINT_LEAST16_FMTo__="ho";__UINT_LEAST16_FMTu__="hu";__UINT_LEAST16_FMTx__="hx";__UINT_LEAST16_MAX__=65535;__UINT_LEAST16_TYPE__=unsigned short;__UINT_LEAST32_FMTX__="X";__UINT_LEAST32_FMTo__="o";__UINT_LEAST32_FMTu__="u";__UINT_LEAST32_FMTx__="x";__UINT_LEAST32_MAX__=4294967295U;__UINT_LEAST32_TYPE__=unsigned int;__UINT_LEAST64_FMTX__="lX";__UINT_LEAST64_FMTo__="lo";__UINT_LEAST64_FMTu__="lu";__UINT_LEAST64_FMTx__="lx";__UINT_LEAST64_MAX__=18446744073709551615UL;__UINT_LEAST64_TYPE__=long unsigned int;__UINT_LEAST8_FMTX__="hhX";__UINT_LEAST8_FMTo__="hho";__UINT_LEAST8_FMTu__="hhu";__UINT_LEAST8_FMTx__="hhx";__UINT_LEAST8_MAX__=255;__UINT_LEAST8_TYPE__=unsigned char;__USER_LABEL_PREFIX__;__VERSION__="4.2.1 Compatible Android Clang 3.8.275480 ";__WCHAR_MAX__=4294967295U;__WCHAR_TYPE__=unsigned int;__WCHAR_UNSIGNED__=1;__WCHAR_WIDTH__=32;__WINT_TYPE__=unsigned int;__WINT_UNSIGNED__=1;__WINT_WIDTH__=32;__aarch64__=1;__clang__=1;__clang_major__=3;__clang_minor__=8;__clang_patchlevel__=275480;__clang_version__="3.8.275480 ";__cplusplus=201103L;__cpp_alias_templates=200704;__cpp_attributes=200809;__cpp_constexpr=200704;__cpp_decltype=200707;__cpp_delegating_constructors=200604;__cpp_exceptions=199711;__cpp_inheriting_constructors=200802;__cpp_initializer_lists=200806;__cpp_lambdas=200907;__cpp_nsdmi=200809;__cpp_range_based_for=200907;__cpp_raw_strings=200710;__cpp_ref_qualifiers=200710;__cpp_rtti=199711;__cpp_rvalue_references=200610;__cpp_static_assert=200410;__cpp_unicode_characters=200704;__cpp_unicode_literals=200710;__cpp_user_defined_literals=200809;__cpp_variadic_templates=200704;__gnu_linux__=1;__linux=1;__linux__=1;__llvm__=1;__pic__=1;__private_extern__=extern;__unix=1;__unix__=1</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>C:\Users\Jason\MagicLeap\mlsdk\v0.20.0\include;C:\Users\Jason\MagicLeap\mlsdk\v0.20.0\lumin\stl\gnu-libstdc++\include;C:\Users\Jason\MagicLeap\mlsdk\v0.20.0\lumin\stl\gnu-libstdc++\include\aarch64-linux-android;C:\Users\Jason\MagicLeap\mlsdk\v0.20.0\lumin\stl\gnu-libstdc++\include\backward;C:\Users\Jason\MagicLeap\mlsdk\v0.20.0\lumin\usr\include;C:\Users\Jason\MagicLeap\mlsdk\v0.20.0\tools\toolchains\lib64\clang\3.8.275480\include</NMakeIncludeSearchPath>
+    <NMakeForcedIncludes>$(LOCALAPPDATA)\Microsoft\VisualStudio\MagicLeap\ml_is.h</NMakeForcedIncludes>
+    <PackageFile>.out/KioskIssue/KioskIssue.mpk</PackageFile>
+    <IntDir>.out\debug_lumin_clang-3.8_aarch64</IntDir>
+    <OutDir>$(ProjectDir)\$(IntDir)</OutDir>
+    <NMakeOutput>$(IntDir)\KioskIssue</NMakeOutput>
+    <ELFFile>$(NMakeOutput)</ELFFile>
+    <DebuggerFlavor>MLDebugger</DebuggerFlavor>
+    <!-- following are defaults for debugger options -->
+    <Attach>false</Attach>
+    <EnableAutoStop>true</EnableAutoStop>
+    <AutoStopAtFunction>main</AutoStopAtFunction>
+    <EnablePrettyPrinting>true</EnablePrettyPrinting>
+    <MLDownloadOnStart>true</MLDownloadOnStart>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ML'">
+    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.20.0</MLSDK>
+    <MLCertificateFile>
+    </MLCertificateFile>
+    <MLExtraBuildOption>
+    </MLExtraBuildOption>
+    <MabuTargetFullSpec>release_lumin_clang-3.8_aarch64</MabuTargetFullSpec>
+    <ExecutablePath>$(MLSDK);$(PATH)</ExecutablePath>
+    <IncludePath />
+    <ReferencePath>
+    </ReferencePath>
+    <LibraryPath>
+    </LibraryPath>
+    <NMakeBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t device_release -v --set-options=ide/visualstudio $(MLExtraBuildOption)</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t device_release -r -v --set-options=ide/visualstudio $(MLExtraBuildOption)</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t device_release -c -v --set-options=ide/visualstudio $(MLExtraBuildOption)</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>_GNU_SOURCE=1;_LP64=1;__AARCH64EL__=1;__ANDROID__=1;__ARM_64BIT_STATE=1;__ARM_ACLE=200;__ARM_ALIGN_MAX_STACK_PWR=4;__ARM_ARCH=8;__ARM_ARCH_ISA_A64=1;__ARM_ARCH_PROFILE='A';__ARM_FEATURE_CLZ=1;__ARM_FEATURE_DIRECTED_ROUNDING=1;__ARM_FEATURE_DIV=1;__ARM_FEATURE_FMA=1;__ARM_FEATURE_IDIV=1;__ARM_FEATURE_LDREX=0xF;__ARM_FEATURE_NUMERIC_MAXMIN=1;__ARM_FEATURE_UNALIGNED=1;__ARM_FP16_ARGS=1;__ARM_FP16_FORMAT_IEEE=1;__ARM_FP=0xE;__ARM_NEON=1;__ARM_NEON_FP=0xE;__ARM_PCS_AAPCS64=1;__ARM_SIZEOF_MINIMAL_ENUM=4;__ARM_SIZEOF_WCHAR_T=4;__ATOMIC_ACQUIRE=2;__ATOMIC_ACQ_REL=4;__ATOMIC_CONSUME=1;__ATOMIC_RELAXED=0;__ATOMIC_RELEASE=3;__ATOMIC_SEQ_CST=5;__BIGGEST_ALIGNMENT__=16;__BYTE_ORDER__=__ORDER_LITTLE_ENDIAN__;__CHAR16_TYPE__=unsigned short;__CHAR32_TYPE__=unsigned int;__CHAR_BIT__=8;__CHAR_UNSIGNED__=1;__CONSTANT_CFSTRINGS__=1;__DBL_DECIMAL_DIG__=17;__DBL_DENORM_MIN__=4.9406564584124654e-324;__DBL_DIG__=15;__DBL_EPSILON__=2.2204460492503131e-16;__DBL_HAS_DENORM__=1;__DBL_HAS_INFINITY__=1;__DBL_HAS_QUIET_NAN__=1;__DBL_MANT_DIG__=53;__DBL_MAX_10_EXP__=308;__DBL_MAX_EXP__=1024;__DBL_MAX__=1.7976931348623157e+308;__DBL_MIN_10_EXP__=(-307);__DBL_MIN_EXP__=(-1021);__DBL_MIN__=2.2250738585072014e-308;__DECIMAL_DIG__=__LDBL_DECIMAL_DIG__;__DEPRECATED=1;__ELF__=1;__EXCEPTIONS=1;__FINITE_MATH_ONLY__=0;__FLT_DECIMAL_DIG__=9;__FLT_DENORM_MIN__=1.40129846e-45F;__FLT_DIG__=6;__FLT_EPSILON__=1.19209290e-7F;__FLT_EVAL_METHOD__=0;__FLT_HAS_DENORM__=1;__FLT_HAS_INFINITY__=1;__FLT_HAS_QUIET_NAN__=1;__FLT_MANT_DIG__=24;__FLT_MAX_10_EXP__=38;__FLT_MAX_EXP__=128;__FLT_MAX__=3.40282347e+38F;__FLT_MIN_10_EXP__=(-37);__FLT_MIN_EXP__=(-125);__FLT_MIN__=1.17549435e-38F;__FLT_RADIX__=2;__GCC_ATOMIC_BOOL_LOCK_FREE=2;__GCC_ATOMIC_CHAR16_T_LOCK_FREE=2;__GCC_ATOMIC_CHAR32_T_LOCK_FREE=2;__GCC_ATOMIC_CHAR_LOCK_FREE=2;__GCC_ATOMIC_INT_LOCK_FREE=2;__GCC_ATOMIC_LLONG_LOCK_FREE=2;__GCC_ATOMIC_LONG_LOCK_FREE=2;__GCC_ATOMIC_POINTER_LOCK_FREE=2;__GCC_ATOMIC_SHORT_LOCK_FREE=2;__GCC_ATOMIC_TEST_AND_SET_TRUEVAL=1;__GCC_ATOMIC_WCHAR_T_LOCK_FREE=2;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1=1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2=1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4=1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_8=1;__GNUC_GNU_INLINE__=1;__GNUC_MINOR__=2;__GNUC_PATCHLEVEL__=1;__GNUC__=4;__GNUG__=4;__GXX_ABI_VERSION=1002;__GXX_EXPERIMENTAL_CXX0X__=1;__GXX_RTTI=1;__GXX_WEAK__=1;__INT16_C_SUFFIX__;__INT16_FMTd__="hd";__INT16_FMTi__="hi";__INT16_MAX__=32767;__INT16_TYPE__=short;__INT32_C_SUFFIX__;__INT32_FMTd__="d";__INT32_FMTi__="i";__INT32_MAX__=2147483647;__INT32_TYPE__=int;__INT64_C_SUFFIX__=L;__INT64_FMTd__="ld";__INT64_FMTi__="li";__INT64_MAX__=9223372036854775807L;__INT64_TYPE__=long int;__INT8_C_SUFFIX__;__INT8_FMTd__="hhd";__INT8_FMTi__="hhi";__INT8_MAX__=127;__INT8_TYPE__=signed char;__INTMAX_C_SUFFIX__=L;__INTMAX_FMTd__="ld";__INTMAX_FMTi__="li";__INTMAX_MAX__=9223372036854775807L;__INTMAX_TYPE__=long int;__INTMAX_WIDTH__=64;__INTPTR_FMTd__="ld";__INTPTR_FMTi__="li";__INTPTR_MAX__=9223372036854775807L;__INTPTR_TYPE__=long int;__INTPTR_WIDTH__=64;__INT_FAST16_FMTd__="hd";__INT_FAST16_FMTi__="hi";__INT_FAST16_MAX__=32767;__INT_FAST16_TYPE__=short;__INT_FAST32_FMTd__="d";__INT_FAST32_FMTi__="i";__INT_FAST32_MAX__=2147483647;__INT_FAST32_TYPE__=int;__INT_FAST64_FMTd__="ld";__INT_FAST64_FMTi__="li";__INT_FAST64_MAX__=9223372036854775807L;__INT_FAST64_TYPE__=long int;__INT_FAST8_FMTd__="hhd";__INT_FAST8_FMTi__="hhi";__INT_FAST8_MAX__=127;__INT_FAST8_TYPE__=signed char;__INT_LEAST16_FMTd__="hd";__INT_LEAST16_FMTi__="hi";__INT_LEAST16_MAX__=32767;__INT_LEAST16_TYPE__=short;__INT_LEAST32_FMTd__="d";__INT_LEAST32_FMTi__="i";__INT_LEAST32_MAX__=2147483647;__INT_LEAST32_TYPE__=int;__INT_LEAST64_FMTd__="ld";__INT_LEAST64_FMTi__="li";__INT_LEAST64_MAX__=9223372036854775807L;__INT_LEAST64_TYPE__=long int;__INT_LEAST8_FMTd__="hhd";__INT_LEAST8_FMTi__="hhi";__INT_LEAST8_MAX__=127;__INT_LEAST8_TYPE__=signed char;__INT_MAX__=2147483647;__LDBL_DECIMAL_DIG__=36;__LDBL_DENORM_MIN__=6.47517511943802511092443895822764655e-4966L;__LDBL_DIG__=33;__LDBL_EPSILON__=1.92592994438723585305597794258492732e-34L;__LDBL_HAS_DENORM__=1;__LDBL_HAS_INFINITY__=1;__LDBL_HAS_QUIET_NAN__=1;__LDBL_MANT_DIG__=113;__LDBL_MAX_10_EXP__=4932;__LDBL_MAX_EXP__=16384;__LDBL_MAX__=1.18973149535723176508575932662800702e+4932L;__LDBL_MIN_10_EXP__=(-4931);__LDBL_MIN_EXP__=(-16381);__LDBL_MIN__=3.36210314311209350626267781732175260e-4932L;__LITTLE_ENDIAN__=1;__LONG_LONG_MAX__=9223372036854775807LL;__LONG_MAX__=9223372036854775807L;__LP64__=1;__NO_INLINE__=1;__ORDER_BIG_ENDIAN__=4321;__ORDER_LITTLE_ENDIAN__=1234;__ORDER_PDP_ENDIAN__=3412;__PIC__=1;__POINTER_WIDTH__=64;__PRAGMA_REDEFINE_EXTNAME=1;__PTRDIFF_FMTd__="ld";__PTRDIFF_FMTi__="li";__PTRDIFF_MAX__=9223372036854775807L;__PTRDIFF_TYPE__=long int;__PTRDIFF_WIDTH__=64;__SCHAR_MAX__=127;__SHRT_MAX__=32767;__SIG_ATOMIC_MAX__=2147483647;__SIG_ATOMIC_WIDTH__=32;__SIZEOF_DOUBLE__=8;__SIZEOF_FLOAT__=4;__SIZEOF_INT128__=16;__SIZEOF_INT__=4;__SIZEOF_LONG_DOUBLE__=16;__SIZEOF_LONG_LONG__=8;__SIZEOF_LONG__=8;__SIZEOF_POINTER__=8;__SIZEOF_PTRDIFF_T__=8;__SIZEOF_SHORT__=2;__SIZEOF_SIZE_T__=8;__SIZEOF_WCHAR_T__=4;__SIZEOF_WINT_T__=4;__SIZE_FMTX__="lX";__SIZE_FMTo__="lo";__SIZE_FMTu__="lu";__SIZE_FMTx__="lx";__SIZE_MAX__=18446744073709551615UL;__SIZE_TYPE__=long unsigned int;__SIZE_WIDTH__=64;__STDC_HOSTED__=1;__STDC_UTF_16__=1;__STDC_UTF_32__=1;__STDC__=1;__STRICT_ANSI__=1;__UINT16_C_SUFFIX__;__UINT16_FMTX__="hX";__UINT16_FMTo__="ho";__UINT16_FMTu__="hu";__UINT16_FMTx__="hx";__UINT16_MAX__=65535;__UINT16_TYPE__=unsigned short;__UINT32_C_SUFFIX__=U;__UINT32_FMTX__="X";__UINT32_FMTo__="o";__UINT32_FMTu__="u";__UINT32_FMTx__="x";__UINT32_MAX__=4294967295U;__UINT32_TYPE__=unsigned int;__UINT64_C_SUFFIX__=UL;__UINT64_FMTX__="lX";__UINT64_FMTo__="lo";__UINT64_FMTu__="lu";__UINT64_FMTx__="lx";__UINT64_MAX__=18446744073709551615UL;__UINT64_TYPE__=long unsigned int;__UINT8_C_SUFFIX__;__UINT8_FMTX__="hhX";__UINT8_FMTo__="hho";__UINT8_FMTu__="hhu";__UINT8_FMTx__="hhx";__UINT8_MAX__=255;__UINT8_TYPE__=unsigned char;__UINTMAX_C_SUFFIX__=UL;__UINTMAX_FMTX__="lX";__UINTMAX_FMTo__="lo";__UINTMAX_FMTu__="lu";__UINTMAX_FMTx__="lx";__UINTMAX_MAX__=18446744073709551615UL;__UINTMAX_TYPE__=long unsigned int;__UINTMAX_WIDTH__=64;__UINTPTR_FMTX__="lX";__UINTPTR_FMTo__="lo";__UINTPTR_FMTu__="lu";__UINTPTR_FMTx__="lx";__UINTPTR_MAX__=18446744073709551615UL;__UINTPTR_TYPE__=long unsigned int;__UINTPTR_WIDTH__=64;__UINT_FAST16_FMTX__="hX";__UINT_FAST16_FMTo__="ho";__UINT_FAST16_FMTu__="hu";__UINT_FAST16_FMTx__="hx";__UINT_FAST16_MAX__=65535;__UINT_FAST16_TYPE__=unsigned short;__UINT_FAST32_FMTX__="X";__UINT_FAST32_FMTo__="o";__UINT_FAST32_FMTu__="u";__UINT_FAST32_FMTx__="x";__UINT_FAST32_MAX__=4294967295U;__UINT_FAST32_TYPE__=unsigned int;__UINT_FAST64_FMTX__="lX";__UINT_FAST64_FMTo__="lo";__UINT_FAST64_FMTu__="lu";__UINT_FAST64_FMTx__="lx";__UINT_FAST64_MAX__=18446744073709551615UL;__UINT_FAST64_TYPE__=long unsigned int;__UINT_FAST8_FMTX__="hhX";__UINT_FAST8_FMTo__="hho";__UINT_FAST8_FMTu__="hhu";__UINT_FAST8_FMTx__="hhx";__UINT_FAST8_MAX__=255;__UINT_FAST8_TYPE__=unsigned char;__UINT_LEAST16_FMTX__="hX";__UINT_LEAST16_FMTo__="ho";__UINT_LEAST16_FMTu__="hu";__UINT_LEAST16_FMTx__="hx";__UINT_LEAST16_MAX__=65535;__UINT_LEAST16_TYPE__=unsigned short;__UINT_LEAST32_FMTX__="X";__UINT_LEAST32_FMTo__="o";__UINT_LEAST32_FMTu__="u";__UINT_LEAST32_FMTx__="x";__UINT_LEAST32_MAX__=4294967295U;__UINT_LEAST32_TYPE__=unsigned int;__UINT_LEAST64_FMTX__="lX";__UINT_LEAST64_FMTo__="lo";__UINT_LEAST64_FMTu__="lu";__UINT_LEAST64_FMTx__="lx";__UINT_LEAST64_MAX__=18446744073709551615UL;__UINT_LEAST64_TYPE__=long unsigned int;__UINT_LEAST8_FMTX__="hhX";__UINT_LEAST8_FMTo__="hho";__UINT_LEAST8_FMTu__="hhu";__UINT_LEAST8_FMTx__="hhx";__UINT_LEAST8_MAX__=255;__UINT_LEAST8_TYPE__=unsigned char;__USER_LABEL_PREFIX__;__VERSION__="4.2.1 Compatible Android Clang 3.8.275480 ";__WCHAR_MAX__=4294967295U;__WCHAR_TYPE__=unsigned int;__WCHAR_UNSIGNED__=1;__WCHAR_WIDTH__=32;__WINT_TYPE__=unsigned int;__WINT_UNSIGNED__=1;__WINT_WIDTH__=32;__aarch64__=1;__clang__=1;__clang_major__=3;__clang_minor__=8;__clang_patchlevel__=275480;__clang_version__="3.8.275480 ";__cplusplus=201103L;__cpp_alias_templates=200704;__cpp_attributes=200809;__cpp_constexpr=200704;__cpp_decltype=200707;__cpp_delegating_constructors=200604;__cpp_exceptions=199711;__cpp_inheriting_constructors=200802;__cpp_initializer_lists=200806;__cpp_lambdas=200907;__cpp_nsdmi=200809;__cpp_range_based_for=200907;__cpp_raw_strings=200710;__cpp_ref_qualifiers=200710;__cpp_rtti=199711;__cpp_rvalue_references=200610;__cpp_static_assert=200410;__cpp_unicode_characters=200704;__cpp_unicode_literals=200710;__cpp_user_defined_literals=200809;__cpp_variadic_templates=200704;__gnu_linux__=1;__linux=1;__linux__=1;__llvm__=1;__pic__=1;__private_extern__=extern;__unix=1;__unix__=1</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>$(MLSDK)\include;$(MLSDK)\lumin\usr\include;$(MLSDK)\tools\toolchains\lib64\clang\3.8.275480\include</NMakeIncludeSearchPath>
+    <NMakeForcedIncludes>$(LOCALAPPDATA)\Microsoft\VisualStudio\MagicLeap\ml_is.h</NMakeForcedIncludes>
+    <PackageFile>.out/KioskIssue/KioskIssue.mpk</PackageFile>
+    <IntDir>.out\release_lumin_clang-3.8_aarch64</IntDir>
+    <OutDir>$(ProjectDir)\$(IntDir)</OutDir>
+    <NMakeOutput>$(IntDir)\KioskIssue</NMakeOutput>
+    <ELFFile>$(NMakeOutput)</ELFFile>
+    <DebuggerFlavor>MLDebugger</DebuggerFlavor>
+    <!-- following are defaults for debugger options -->
+    <Attach>false</Attach>
+    <EnableAutoStop>false</EnableAutoStop>
+    <AutoStopAtFunction>
+    </AutoStopAtFunction>
+    <EnablePrettyPrinting>true</EnablePrettyPrinting>
+    <MLDownloadOnStart>true</MLDownloadOnStart>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.20.0</MLSDK>
+    <MLCertificateFile>
+    </MLCertificateFile>
+    <MLExtraBuildOption>
+    </MLExtraBuildOption>
+    <MabuTargetFullSpec>debug_win_msvc-2017-15.9_x64</MabuTargetFullSpec>
+    <ExecutablePath>$(MLSDK);$(PATH)</ExecutablePath>
+    <NMakeBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_debug -v VCDIR="$(VCInstallDir) $(MLExtraBuildOption)</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_debug -r -v VCDIR="$(VCInstallDir) $(MLExtraBuildOption)</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_debug -c -v VCDIR="$(VCInstallDir) $(MLExtraBuildOption)</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>
+    </NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>C:Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include;C:Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt;C:Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um;$(MLSDK)\include</NMakeIncludeSearchPath>
+    <PackageFile>.out/KioskIssue/KioskIssue.mpk</PackageFile>
+    <IntDir>.out\debug_win_msvc-2017-15.9_x64</IntDir>
+    <OutDir>$(ProjectDir)\$(IntDir)</OutDir>
+    <NMakeOutput>$(IntDir)\KioskIssue.exe</NMakeOutput>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <!-- following are defaults for debugger options -->
+    <Attach>false</Attach>
+    <MLDownloadOnStart>true</MLDownloadOnStart>
+    <!-- Set this for running with Simulator (ML Remote) -->
+    <LocalDebuggerEnvironment>PATH=$(MLSDK)\VirtualDevice\bin;$(MLSDK)\VirtualDevice\lib;$(MLSDK)\lib\win64</LocalDebuggerEnvironment>
+    <!-- set this for launching Lumin RT examples -->
+    <LocalDebuggerWorkingDirectory>$(ProjectDir)\.out\KioskIssue</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.20.0</MLSDK>
+    <MLCertificateFile>
+    </MLCertificateFile>
+    <MLExtraBuildOption>
+    </MLExtraBuildOption>
+    <MabuTargetFullSpec>release_win_msvc-2017-15.9_x64</MabuTargetFullSpec>
+    <ExecutablePath>$(MLSDK);$(PATH)</ExecutablePath>
+    <NMakeBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_release -v VCDIR="$(VCInstallDir) $(MLExtraBuildOption)</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_release -r -v VCDIR="$(VCInstallDir) $(MLExtraBuildOption)</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>mabu $(MLProjectFile) MLSDK="$(MLSDK)" -t msvc-2017_release -c -v VCDIR="$(VCInstallDir) $(MLExtraBuildOption)</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>
+    </NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>C:Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include;C:Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um;C:Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt;C:Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um;$(MLSDK)\include</NMakeIncludeSearchPath>
+    <PackageFile>.out/KioskIssue/KioskIssue.mpk</PackageFile>
+    <IntDir>.out\release_win_msvc-2017-15.9_x64</IntDir>
+    <OutDir>$(ProjectDir)\$(IntDir)</OutDir>
+    <NMakeOutput>$(IntDir)\KioskIssue.exe</NMakeOutput>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <!-- following are defaults for debugger options -->
+    <Attach>false</Attach>
+    <!-- Set this for running with Simulator (ML Remote) -->
+    <LocalDebuggerEnvironment>PATH=$(MLSDK)\VirtualDevice\bin;$(MLSDK)\VirtualDevice\lib;$(MLSDK)\lib\win64</LocalDebuggerEnvironment>
+    <!-- set this for launching Lumin RT examples -->
+    <LocalDebuggerWorkingDirectory>$(ProjectDir)\.out\KioskIssue</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="manifest.xml" />
+    <None Include="KioskIssue.mabu" />
+    <None Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="KioskIssue.package" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties MLProjectMabuSyncTime="132024414973195835 (5/16/2019 12:51:37 AM UTC)" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
