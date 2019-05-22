@@ -7,8 +7,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FullscreenGLApp", "Fullscre
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImageTrackerBug", "ImageTrackerBug\ImageTrackerBug.vcxproj", "{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KioskIssue", "KioskIssue\KioskIssue.vcxproj", "{4106B3FD-533A-406A-97C6-F4287A0037AD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ML = Debug|ML
@@ -33,14 +31,6 @@ Global
 		{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}.Release|ML.Build.0 = Release|ML
 		{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}.Release|x64.ActiveCfg = Release|x64
 		{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}.Release|x64.Build.0 = Release|x64
-		{4106B3FD-533A-406A-97C6-F4287A0037AD}.Debug|ML.ActiveCfg = Debug|ML
-		{4106B3FD-533A-406A-97C6-F4287A0037AD}.Debug|ML.Build.0 = Debug|ML
-		{4106B3FD-533A-406A-97C6-F4287A0037AD}.Debug|x64.ActiveCfg = Debug|x64
-		{4106B3FD-533A-406A-97C6-F4287A0037AD}.Debug|x64.Build.0 = Debug|x64
-		{4106B3FD-533A-406A-97C6-F4287A0037AD}.Release|ML.ActiveCfg = Release|ML
-		{4106B3FD-533A-406A-97C6-F4287A0037AD}.Release|ML.Build.0 = Release|ML
-		{4106B3FD-533A-406A-97C6-F4287A0037AD}.Release|x64.ActiveCfg = Release|x64
-		{4106B3FD-533A-406A-97C6-F4287A0037AD}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
