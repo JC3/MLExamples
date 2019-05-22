@@ -83,7 +83,7 @@
     </PropertyPageSchema>
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ML'">
-    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.19.0</MLSDK>
+    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.20.0</MLSDK>
     <MLCertificateFile>
     </MLCertificateFile>
     <!--This should appear before <NMakeBuildCommandLine> -->
@@ -114,9 +114,10 @@
     <AutoStopAtFunction>main</AutoStopAtFunction>
     <EnablePrettyPrinting>true</EnablePrettyPrinting>
     <MLDownloadOnStart>true</MLDownloadOnStart>
+    <MLDeviceSerialNumber>G1306M002172</MLDeviceSerialNumber>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ML'">
-    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.19.0</MLSDK>
+    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.20.0</MLSDK>
     <MLCertificateFile>
     </MLCertificateFile>
     <MLExtraBuildOption>
@@ -149,7 +150,7 @@
     <MLDownloadOnStart>true</MLDownloadOnStart>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.19.0</MLSDK>
+    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.20.0</MLSDK>
     <MLCertificateFile>
     </MLCertificateFile>
     <MLExtraBuildOption>
@@ -176,7 +177,7 @@
     <LocalDebuggerWorkingDirectory>$(ProjectDir)\.out\ImageTrackerBug</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.19.0</MLSDK>
+    <MLSDK>C:\Users\Jason\MagicLeap\mlsdk\v0.20.0</MLSDK>
     <MLCertificateFile>
     </MLCertificateFile>
     <MLExtraBuildOption>
@@ -216,7 +217,7 @@
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties MLProjectMabuSyncTime="131947945906528128 (2/16/2019 12:43:10 PM UTC)" />
+      <UserProperties MLProjectMabuSyncTime="132024403039243252 (5/16/2019 12:31:43 AM UTC)" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
