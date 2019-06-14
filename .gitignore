@@ -304,3 +304,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 KioskIssue/KioskIssue.vcxproj.filters
+ManifestParsing/ManifestParsing.vcxproj.filters

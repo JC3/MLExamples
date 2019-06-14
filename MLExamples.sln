@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FullscreenGLApp", "Fullscre
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImageTrackerBug", "ImageTrackerBug\ImageTrackerBug.vcxproj", "{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ManifestParsing", "ManifestParsing\ManifestParsing.vcxproj", "{413A64E8-747D-460B-99D0-3DE2952A2FA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ML = Debug|ML
@@ -31,6 +33,14 @@ Global
 		{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}.Release|ML.Build.0 = Release|ML
 		{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}.Release|x64.ActiveCfg = Release|x64
 		{1B238BD2-E599-4EC4-80E4-E39AD71C7D98}.Release|x64.Build.0 = Release|x64
+		{413A64E8-747D-460B-99D0-3DE2952A2FA4}.Debug|ML.ActiveCfg = Debug|ML
+		{413A64E8-747D-460B-99D0-3DE2952A2FA4}.Debug|ML.Build.0 = Debug|ML
+		{413A64E8-747D-460B-99D0-3DE2952A2FA4}.Debug|x64.ActiveCfg = Debug|x64
+		{413A64E8-747D-460B-99D0-3DE2952A2FA4}.Debug|x64.Build.0 = Debug|x64
+		{413A64E8-747D-460B-99D0-3DE2952A2FA4}.Release|ML.ActiveCfg = Release|ML
+		{413A64E8-747D-460B-99D0-3DE2952A2FA4}.Release|ML.Build.0 = Release|ML
+		{413A64E8-747D-460B-99D0-3DE2952A2FA4}.Release|x64.ActiveCfg = Release|x64
+		{413A64E8-747D-460B-99D0-3DE2952A2FA4}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,19 @@
+<manifest
+	xmlns:ml="magicleap"
+	ml:package="com.mlexamples.manifestparsing"
+	ml:version_code="1"
+	ml:version_name="Version 1.05-pre9-r6-beta-ultra-adjective_mammal">
+	<application
+		ml:visible_name="ManifestParsing"
+    ml:sdk_version="0.20.0"
+    ml:min_api_level="3">
+    <component
+			ml:name=".console"
+			ml:visible_name="ManifestParsing"
+			ml:binary_name="bin/ManifestParsing"
+			ml:type="Console">
+      <icon ml:model_folder=""
+            ml:portal_folder=""/>
+    </component>
+	</application>
+</manifest>
