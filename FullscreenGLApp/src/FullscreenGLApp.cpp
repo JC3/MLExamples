@@ -14,10 +14,10 @@
 // ---------------------------------------------------------------------
 // %BANNER_END%
 
-#include <runtime/external/glm/glm.hpp>
-#include <runtime/external/glm/gtx/quaternion.hpp>
-#include <runtime/external/glm/gtx/transform.hpp>
-#include <runtime/external/glm/gtc/type_ptr.hpp>
+#include <runtime/external/glm/glm/glm.hpp>
+#include <runtime/external/glm/glm/gtx/quaternion.hpp>
+#include <runtime/external/glm/glm/gtx/transform.hpp>
+#include <runtime/external/glm/glm/gtc/type_ptr.hpp>
 
 #include <ml_head_tracking.h>
 #include <ml_graphics.h>
